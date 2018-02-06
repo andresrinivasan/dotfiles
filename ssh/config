@@ -1,0 +1,41 @@
+Host heroku.com
+  Hostname heroku.com
+  IdentityFile ~/.ssh/heroku_rsa
+  IdentitiesOnly yes
+
+Host github.com
+  Hostname github.com
+  IdentityFile ~/.ssh/github_rsa
+  IdentitiesOnly yes
+
+Host bbb
+  Hostname 192.168.7.2
+  User root
+
+Host bitbucket.org
+  Hostname bitbucket.org
+  IdentityFile ~/.ssh/andresrinivasan-Bitbucket
+  IdentitiesOnly yes
+
+Host htpc
+  User root
+
+# --- SourceTree Generated ---
+Host andresrinivasan-Bitbucket
+	HostName bitbucket.org
+	User andresrinivasan
+	PreferredAuthentications publickey
+	IdentityFile /Users/andre/.ssh/andresrinivasan-Bitbucket
+	UseKeychain yes
+	AddKeysToAgent yes
+# ----------------------------
+
+# --- SourceTree Generated ---
+Host andresrinivasan-GitHub
+	HostName github.com
+	User andresrinivasan
+	PreferredAuthentications publickey
+	IdentityFile /Users/andre/.ssh/andresrinivasan-GitHub
+	UseKeychain yes
+	AddKeysToAgent yes
+# ----------------------------
