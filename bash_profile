@@ -17,7 +17,7 @@ function jq() {
   /usr/local/bin/jq $color "$@"
 }
 
-function GET {
+function GET() {
   if [ "$1" == "-M" ]; then
     mono=-M
     shift
@@ -26,7 +26,7 @@ function GET {
   /usr/bin/curl "$@" | jq $mono .
 }
 
-function EVTGET {
+function EVTGET() {
   if [ "$1" == "-M" ]; then
     mono=-M
     shift
@@ -36,22 +36,45 @@ function EVTGET {
 }
 export EVT_API=https://api.evrythng.com
 
-export HISTCONTROL=ignoreboth
+function set_title_bar() {
+  case "$BASH_COMMAND" in
+    *\033]0*)
+      # The command is trying to set the title bar as well;
+      # this is most likely the execution of $PROMPT_COMMAND.
+      # In any case nested escapes confuse the terminal, so don't
+      # output them.
+      ;;
+    *)
+      if [ "`type -t ${BASH_COMMAND}`" = "file" ]; then
+        append=${BASH_COMMAND}
+        PROMPT_COMMAND='echo -ne "\033]0;`pwd` | ${HOSTNAME} | bash\007"'
+      else
+        append='bash'
+        unset PROMPT_COMMAND
+      fi
+      echo -ne "\033]0;`pwd` | ${HOSTNAME} | ${append}\007"
+      ;;
 
+    esac
+}
+trap set_title_bar DEBUG
+
+export PS1=': \W\$ '
+##export PROMPT_COMMAND='echo -ne "\033]0;`pwd` | ${HOSTNAME} | bash\007"'
+
+export HISTCONTROL=ignoreboth
 export LESS=-FRX
-export PS1='\[\e]0;\h\a\]: \w\$ '
 export HOMEBREW_GITHUB_API_TOKEN=61911fd78224da6ee9376b6d631d2d593d3a96ed
 
 export NVM_DIR="/Users/andre/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-PATH=~/bin:/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+PATH=~/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:$PATH
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+if hash brew 2>/dev/null; then
+  [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 fi
 
-
-##test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
