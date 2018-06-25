@@ -57,15 +57,16 @@ export EVT_API=https://api.evrythng.com
 # export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"'
 
 ## See https://github.com/rcaloras/bash-preexec
-[[ -s ~/.bash-preexec.sh ]] && . ~/.bash-preexec.sh
-function preexec() {
-  if [[ `type -t $1` =~ file|function|alias ]]; then
-    echo -ne "\033]0;${PWD/#$HOME/'~'} | ${HOSTNAME} | $1\007"
-  fi
-}
+if [[ -s ~/.bash-preexec.sh ]]; then
+  . ~/.bash-preexec.sh
+  function preexec() {
+    if [[ `type -t $1` =~ file|function|alias ]]; then
+      echo -ne "\033]0;${PWD/#$HOME/'~'} | ${HOSTNAME} | $1\007"
+    fi
+  }
 
-function precmd() { echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"; }
-
+  function precmd() { echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"; }
+fi
 export PS1=': \W\$ '
 
 export HISTCONTROL=ignoreboth
@@ -74,8 +75,10 @@ export LESS=-FRX
 export NVM_DIR="$HOME/.nvm"
 [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
-PATH=~/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:$PATH
-MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+PATH=~/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
+MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
+
+GOPATH=~/go:~/src/go
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
