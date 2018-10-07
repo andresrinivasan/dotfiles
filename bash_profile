@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function ls() {
   /bin/ls -FG "$@"
@@ -75,10 +75,10 @@ export LESS=-FRX
 export NVM_DIR="$HOME/.nvm"
 [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
-PATH=~/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
-MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
+export GOPATH=~/go
 
-GOPATH=~/go:~/src/go
+PATH=~/bin:`go env GOPATH`/bin:`go env GOROOT`/bin:~/Library/Python/3.7/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
+MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
@@ -89,3 +89,9 @@ fi
 
 ## Extra stuff that shouldn't go into GitHub
 [[ -s ~/.bash_extras ]] && . ~/.bash_extras
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc'; fi

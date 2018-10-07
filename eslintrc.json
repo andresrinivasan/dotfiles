@@ -1,11 +1,19 @@
 {
   "root": true,
 
-  "extends": "airbnb",
+  "extends": ["airbnb"],
 
   "env": {
     "node": true,
     "es6": true
+  },
+
+  "parserOptions": {
+    "sourceType": "script"
+  },
+
+  "rules": {
+    "strict": ["error", "safe"]
   }
 }
 
