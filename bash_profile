@@ -3,6 +3,7 @@
 function ls() {
   /bin/ls -FG "$@"
 }
+export -f ls
 
 function jq() {
   local color
@@ -76,6 +77,7 @@ export NVM_DIR="$HOME/.nvm"
 [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
 export GOPATH=~/go
+export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.2.5/lib/pkgconfig/
 
 PATH=~/bin:`go env GOPATH`/bin:`go env GOROOT`/bin:~/Library/Python/3.7/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"

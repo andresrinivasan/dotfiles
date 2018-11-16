@@ -1,0 +1,26 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Andre Srinivasan
+	email = andre.srinivasan@gmail.com
+	signingkey = 23CFFEC9C545E50E
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[core]
+	excludesfile = /Users/andresrinivasan/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/andresrinivasan/.git-commit-template-me
+	gpgsign = true
+[pull]
+	rebase = true
+[pretty]
+	simple = format:%Cred%h%Creset:%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+[format]
+	pretty = simple
+[rerere]
+	enabled = true
