@@ -7,6 +7,7 @@
     insteadOf = https://github.com/
 [core]
 	excludesfile = /Users/andresrinivasan/.gitignore_global
+	hooksPath = /Users/andresrinivasan/.git-hooks
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -14,7 +15,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/andresrinivasan/.git-commit-template-me
+##	template = /Users/andresrinivasan/.git-commit-template-me
 	gpgsign = true
 [pull]
 	rebase = true
