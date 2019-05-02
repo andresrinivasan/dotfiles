@@ -73,21 +73,24 @@ export PS1=': \W\$ '
 export HISTCONTROL=ignoreboth
 export LESS=-FRX
 
-export NVM_DIR="$HOME/.nvm"
-[[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
+# export NVM_DIR="$HOME/.nvm"
+# [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
 export GOPATH=~/go
-export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.2.5/lib/pkgconfig/
+export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.1_1/lib/pkgconfig/
 
-PATH=~/bin:`go env GOPATH`/bin:`go env GOROOT`/bin:~/Library/Python/3.7/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
+PATH=~/bin:~/go/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:/usr/local/opt/node@10/bin:$PATH
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
+
+export LDFLAGS=-L/usr/local/opt/node@10/lib
+export CPPFLAGS=-I/usr/local/opt/node@10/include
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
   [[ -f $(brew --prefix)/etc/bash_completion ]] && . $(brew --prefix)/etc/bash_completion
 fi
 
-[[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
+# [[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
 
 ## Extra stuff that shouldn't go into GitHub
 [[ -s ~/.bash_extras ]] && . ~/.bash_extras

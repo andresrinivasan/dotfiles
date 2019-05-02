@@ -15,7 +15,6 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-##	template = /Users/andresrinivasan/.git-commit-template-me
 	gpgsign = true
 [pull]
 	rebase = true
@@ -23,5 +22,3 @@
 	simple = format:%Cred%h%Creset:%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [format]
 	pretty = simple
-[rerere]
-	enabled = true
