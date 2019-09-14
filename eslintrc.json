@@ -1,19 +1,9 @@
 {
-  "root": true,
-
-  "extends": ["airbnb"],
-
-  "env": {
-    "node": true,
-    "es6": true
-  },
-
-  "parserOptions": {
-    "sourceType": "script"
-  },
-
+  "extends": ["standard"],
+  
   "rules": {
-    "strict": ["error", "safe"]
+    "space-before-function-paren": ["error", "never"],
+    "quotes": ["error", "double"],
+    "comma-dangle": ["error", "only-multiline"]
   }
 }
-

@@ -85,9 +85,12 @@ MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:
 export LDFLAGS=-L/usr/local/opt/node@10/lib
 export CPPFLAGS=-I/usr/local/opt/node@10/include
 
+export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
+
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
-  [[ -f $(brew --prefix)/etc/bash_completion ]] && . $(brew --prefix)/etc/bash_completion
+  [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && . $(brew --prefix)/etc/profile.d/bash_completion.sh
 fi
 
 # [[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
