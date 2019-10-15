@@ -68,6 +68,7 @@ if [[ -s ~/.bash-preexec.sh ]]; then
 
   function precmd() { echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"; }
 fi
+
 export PS1=': \W\$ '
 
 export HISTCONTROL=ignoreboth
@@ -103,3 +104,6 @@ if [ -f '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc' ]; then source 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc'; fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
