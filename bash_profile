@@ -78,13 +78,10 @@ export LESS=-FRX
 # [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
 export GOPATH=~/go
-export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.1_1/lib/pkgconfig/
+export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
 
-PATH=~/bin:~/go/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:/usr/local/opt/node@10/bin:$PATH
+PATH=~/bin:~/go/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
-
-export LDFLAGS=-L/usr/local/opt/node@10/lib
-export CPPFLAGS=-I/usr/local/opt/node@10/include
 
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
 export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
