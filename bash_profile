@@ -58,18 +58,22 @@ export EVT_API=https://api.evrythng.com
 # export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"'
 
 ## See https://github.com/rcaloras/bash-preexec
-if [[ -s ~/.bash-preexec.sh ]]; then
-  . ~/.bash-preexec.sh
-  function preexec() {
-    if [[ `type -t $1` =~ file|function|alias ]]; then
-      echo -ne "\033]0;${PWD/#$HOME/'~'} | ${HOSTNAME} | $1\007"
-    fi
-  }
+# if [[ -s ~/.bash-preexec.sh ]]; then
+#   . ~/.bash-preexec.sh
+#   function preexec() {
+#     if [[ `type -t $1` =~ file|function|alias ]]; then
+#       echo -ne "\033]0;${PWD/#$HOME/'~'} | ${HOSTNAME} | $1\007"
+#     fi
+#   }
 
-  function precmd() { echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"; }
+#   function precmd() { echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"; }
+# fi
+
+# export PS1=': \W\$ '
+
+if [ "$TERM" != "linux" ]; then
+  . ~/repos/pureline/pureline ~/.pureline
 fi
-
-export PS1=': \W\$ '
 
 export HISTCONTROL=ignoreboth
 export LESS=-FRX
