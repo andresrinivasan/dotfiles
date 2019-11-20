@@ -2,6 +2,11 @@
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
 
+function newline_module {
+    PS1+="$(section_end $__last_color 'Default')"
+    PS1+="\[$(iterm2_prompt_mark)\]"
+}
+
 # All modules are enabled. Uncomment/comment to enable/disable a module
 declare -a PL_MODULES=(
     # Module                Background  Foreground
@@ -16,6 +21,7 @@ declare -a PL_MODULES=(
     'git_module             MyGreen     Black'
     'return_code_module     MyRed       White'
     'newline_module'
+#    'iterm2_prompt_mark'
     'prompt_module          MyDarkGrey  White'
 )
 
@@ -24,5 +30,4 @@ PL_PATH_TRIM=4             # 0 Full path, 1, Current, 2+ trim level
 PL_SSH_SHOW_HOST=false
 
 PL_SYMBOLS[ssh]="𝔖"
-
 
