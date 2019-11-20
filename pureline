@@ -2,9 +2,16 @@
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
 
-function newline_module {
-    PS1+="$(section_end $__last_color 'Default')"
+function iterm2_prompt_mark {
     PS1+="\[$(iterm2_prompt_mark)\]"
+}
+
+function newline_module {
+    if [ -n "$__last_color" ]; then
+        PS1+="$(section_end $__last_color 'Default')"
+    fi
+    PS1+="\n\[$(iterm2_prompt_mark)\]"
+    unset __last_color
 }
 
 # All modules are enabled. Uncomment/comment to enable/disable a module
