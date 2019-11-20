@@ -75,7 +75,7 @@ PL_SYMBOLS[git_modified]="✚ "
 PL_SYMBOLS[git_staged]="✔ "
 PL_SYMBOLS[git_conflicts]="✘ "
 
-PL_SYMBOLS[ssh]=" "
+PL_SYMBOLS[ssh]="𝔖"
 PL_SYMBOLS[read_only]=""
 PL_SYMBOLS[return_code]="⚑"
 PL_SYMBOLS[background_jobs]="⏎"
