@@ -2,15 +2,20 @@
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
 
-function iterm2_mark_module {
-    if [ -n "$__last_color" ]; then
-        PS1+="$(section_end $__last_color 'Default')"
-    fi
-    PS1+="\[$(iterm2_prompt_mark)\]"
-    unset __last_color
-}
+# function iterm2_mark_module {
+#     if [ -n "$__last_color" ]; then
+#         PS1+="$(section_end $__last_color 'Default')"
+#     fi
+#     PS1+="\[$(iterm2_prompt_mark)\]"
+#     unset __last_color
+# }
 
-function newline_module {
+## Override supplied newline module to make it optional and integrate with iterm2 prompt
+function maybe_newline_module {
+    if [ $LINES -lt 25 ]; then
+        return
+    fi
+
     if [ -n "$__last_color" ]; then
         PS1+="$(section_end $__last_color 'Default')"
     fi
@@ -31,7 +36,7 @@ declare -a PL_MODULES=(
     'background_jobs_module MyPurple    White'
     'git_module             MyGreen     Black'
     'return_code_module     MyRed       White'
-    'newline_module'
+    'maybe_newline_module'
 #    'iterm2_mark_module'
     'prompt_module          MyDarkGrey  White'
 )
