@@ -2,28 +2,31 @@
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
 
+export ITERM2_SQUELCH_MARK=YES
 function iterm2_mark_module {
     PS1+="\[$(iterm2_prompt_mark)\]"
 }
 
-# Override supplied newline module to make it optional
-function maybe_newline_module {
-    if [ $LINES -lt 25 ]; then
-        return
-    fi
+declare -a PL_MODULES_ITERM
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+    PL_MODULES_ITERM=('iterm2_mark_module')
+fi
 
-    if [ -n "$__last_color" ]; then
-        PS1+="$(section_end $__last_color 'Default')"
-    fi
-    unset __last_color
-}
+declare -a PL_MODULES_PREFIX
+declare -a PL_MODULES_SUFFIX
+if [ $LINES -lt 26 ]; then
+    PL_MODULES_PREFIX=("${PL_MODULES_ITERM[@]}")
+else
+    PL_MODULES_SUFFIX=(
+        'newline_module'
+        "${PL_MODULES_ITERM[@]}"
+    )
+fi
 
-# All modules are enabled. Uncomment/comment to enable/disable a module
-declare -a PL_MODULES=(
+declare -a PL_MODULES=("${PL_MODULES_PREFIX[@]}")
+PL_MODULES+=(
     # Module                Background  Foreground
     'time_module            MyLightGrey Black'
-#    'battery_module         MyBlue      Black'
-#    'user_module            MyLime      Black'
     'ssh_module             MyYellow    Black'
     'virtual_env_module     MyBlue      Black'
     'path_module            MyBlue      Black'
@@ -31,8 +34,7 @@ declare -a PL_MODULES=(
     'background_jobs_module MyPurple    White'
     'git_module             MyGreen     Black'
     'return_code_module     MyRed       White'
-    'maybe_newline_module'
-    'iterm2_mark_module'
+    "${PL_MODULES_SUFFIX[@]}"
     'prompt_module          MyDarkGrey  White'
 )
 
