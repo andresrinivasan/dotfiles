@@ -23,8 +23,9 @@ else
     )
 fi
 
-declare -a PL_MODULES=("${PL_MODULES_PREFIX[@]}")
-PL_MODULES+=(
+declare -a PL_MODULES=(
+    "${PL_MODULES_PREFIX[@]}"
+
     # Module                Background  Foreground
     'time_module            MyLightGrey Black'
     'ssh_module             MyYellow    Black'
@@ -34,7 +35,9 @@ PL_MODULES+=(
     'background_jobs_module MyPurple    White'
     'git_module             MyGreen     Black'
     'return_code_module     MyRed       White'
+
     "${PL_MODULES_SUFFIX[@]}"
+    
     'prompt_module          MyDarkGrey  White'
 )
 

@@ -71,6 +71,11 @@ export EVT_API=https://api.evrythng.com
 
 # export PS1=': \W\$ '
 
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+  test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+fi
+
 if [ "$TERM" != "linux" ]; then
   . ~/repos/pureline/pureline ~/.pureline
 fi
@@ -106,7 +111,3 @@ if [ -f '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc' ]; then source 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc'; fi
 
-if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
-  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-  test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-fi
