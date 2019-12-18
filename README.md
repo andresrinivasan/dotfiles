@@ -4,7 +4,7 @@
 ## Fonts
 
 * Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
-* FiraCode-Retina for editor
+* FiraCode-Retina for VSCode
 
 ## Tools
 
