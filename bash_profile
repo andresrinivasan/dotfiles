@@ -71,14 +71,14 @@ export EVT_API=https://api.evrythng.com
 
 # export PS1=': \W\$ '
 
-if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
-  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-  test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-fi
+# if [ "$TERM" != "linux" ]; then
+#   . ~/repos/pureline/pureline ~/.pureline
+# fi
 
-if [ "$TERM" != "linux" ]; then
-  . ~/repos/pureline/pureline ~/.pureline
-fi
+# if [ "$TERM_PROGRAM" != "vscode" ]; then
+#   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+#   test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# fi
 
 export HISTCONTROL=ignoreboth
 export LESS=-FRX
@@ -89,11 +89,11 @@ export LESS=-FRX
 export GOPATH=~/go
 export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
 
-PATH=~/bin:~/go/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
+PATH=~/bin:~/go/bin:~/.poetry/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
 
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
+##export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
@@ -111,3 +111,4 @@ if [ -f '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc' ]; then source 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc'; fi
 
+. ~/.bashrc

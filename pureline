@@ -1,49 +1,64 @@
+#!/usr/bin/env bash
+
 # Full example config for PureLine using default powerline symbols
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
 
 export ITERM2_SQUELCH_MARK=YES
-function iterm2_mark_module {
-    PS1+="\[$(iterm2_prompt_mark)\]"
+function iterm2_mark_module() {
+  PS1+="\[$(iterm2_prompt_mark)\]"
+}
+
+# simplified python virtual environment
+# arg: $1 foreground color
+# arg; $2 background color
+function my_virtual_env_module {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        local venv="${VIRTUAL_ENV##*/}"
+        local bg_color="$1"
+        local fg_color="$2"
+        local content=" ${PL_SYMBOLS[python]}"
+        PS1+="$(section_end $fg_color $bg_color)"
+        PS1+="$(section_content $fg_color $bg_color "$content ")"
+        __last_color="$bg_color"
+    fi
 }
 
 declare -a PL_MODULES_ITERM
 if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
-    PL_MODULES_ITERM=('iterm2_mark_module')
+  PL_MODULES_ITERM=('iterm2_mark_module')
 fi
 
 declare -a PL_MODULES_PREFIX
 declare -a PL_MODULES_SUFFIX
 if [ $LINES -lt 26 ]; then
-    PL_MODULES_PREFIX=("${PL_MODULES_ITERM[@]}")
+  PL_MODULES_PREFIX=("${PL_MODULES_ITERM[@]}")
 else
-    PL_MODULES_SUFFIX=(
-        'newline_module'
-        "${PL_MODULES_ITERM[@]}"
-    )
+  PL_MODULES_SUFFIX=(
+    'newline_module'
+    "${PL_MODULES_ITERM[@]}"
+  )
 fi
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1 
 declare -a PL_MODULES=(
-    "${PL_MODULES_PREFIX[@]}"
+  "${PL_MODULES_PREFIX[@]}"
 
-    # Module                Background  Foreground
-    'time_module            MyLightGrey Black'
-    'ssh_module             MyYellow    Black'
-    'virtual_env_module     MyBlue      Black'
-    'path_module            MyBlue      Black'
-    'read_only_module       MyRed       White'
-    'background_jobs_module MyPurple    White'
-    'git_module             MyGreen     Black'
-    'return_code_module     MyRed       White'
-
-    "${PL_MODULES_SUFFIX[@]}"
-    
-    'prompt_module          MyDarkGrey  White'
+  # Module                Background  Foreground
+  'time_module            MyLightGrey Black'
+  'ssh_module             MyYellow    Black'
+  'my_virtual_env_module  MyLime      Black'
+  'path_module            MyBlue      Black'
+  'read_only_module       MyRed       White'
+  'background_jobs_module MyPurple    White'
+  'git_module             MyGreen     Black'
+  'return_code_module     MyRed       White'
+  "${PL_MODULES_SUFFIX[@]}"
+  'prompt_module          MyDarkGrey  White'
 )
 
 # Module Options
-PL_PATH_TRIM=4             # 0 Full path, 1, Current, 2+ trim level
+PL_PATH_TRIM=4 # 0 Full path, 1, Current, 2+ trim level
 PL_SSH_SHOW_HOST=false
 
 PL_SYMBOLS[ssh]="𝔖"
-
