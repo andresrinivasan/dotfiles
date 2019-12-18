@@ -8,17 +8,18 @@
 
 ## Tools
 
-* Brew
-* Bash (via Brew on MacOS)
+* Brew (MacOS)
+* bash (via Brew on MacOS)
 * Bash Completion 2
-* Tmux
+* tmux
 * Pureline (via Github)
-* Jq
-* ET
-* SSH
-* Git
-* Go
+* jq
+* et
+* ssh
+* git
+* go
 * Redis
-* Socat
+* socat
 * Python 3
-* iterm2
+* Iterm 2
+* 
