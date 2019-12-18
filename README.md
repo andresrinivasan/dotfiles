@@ -1,7 +1,10 @@
 # dot-files
 
-Assumes Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
-Assume modern bash (not MacOS default)
+
+## Fonts
+
+* Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
+* FiraCode-Retina for editor
 
 ## Tools
 
@@ -18,3 +21,4 @@ Assume modern bash (not MacOS default)
 * Redis
 * Socat
 * Python 3
+* iterm2
