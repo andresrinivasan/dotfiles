@@ -95,6 +95,8 @@ MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
 ##export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
 
+export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
+
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 if hash brew 2>/dev/null; then
   [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && . $(brew --prefix)/etc/profile.d/bash_completion.sh
