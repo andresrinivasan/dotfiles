@@ -1,42 +1,5 @@
 #!/usr/bin/env bash
 
-function ls() {
-  /bin/ls -FG "$@"
-}
-export -f ls
-
-function jq() {
-  local color
-
-  if [[ $1 == -M ]]; then
-    color=--monochrome-output
-    shift
-  else
-    color=--color-output
-  fi
-
-  /usr/local/bin/jq $color "$@"
-}
-
-function GET() {
-  if [[ $1 == -M ]]; then
-    mono=-M
-    shift
-  fi
-
-  /usr/bin/curl "$@" | jq $mono .
-}
-
-function EVTGET() {
-  if [[ $1 == -M ]]; then
-    mono=-M
-    shift
-  fi
-
-  GET $mono -Hauthorization:$EVT_API_KEY -Haccept:application/json $EVT_API"$@"
-}
-export EVT_API=https://api.evrythng.com
-
 ## See https://www.davidpashley.com/articles/xterm-titles-with-bash/ and https://mg.pov.lt/blog/bash-prompt.html
 # function set_title_bar() {
 #   case "${BASH_COMMAND}" in
@@ -88,19 +51,56 @@ export LESS=-FRX
 
 export GOPATH=~/go
 export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
-
-PATH=~/bin:~/go/bin:~/.poetry/bin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
-MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
-
-export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-##export BASH_COMPLETION_USER_DIR=~/.bash_completion.d
-
 export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+
+PATH=~/bin:~/.poetry/bin:${GOPATH//://bin:}/bin:$PATH
 if hash brew 2>/dev/null; then
-  [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && . $(brew --prefix)/etc/profile.d/bash_completion.sh
+  PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
+  MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
 fi
+
+if hash /usr/local/etc/profile.d/bash_completion.sh 2>/dev/null; then
+  . /usr/local/etc/profile.d/bash_completion.sh
+  export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+elif hash /usr/share/bash-completion/bash_completion 2>/dev/null; then
+  . /usr/share/bash-completion/bash_completion
+elif hash /etc/bash_completion 2>/dev/null; then
+  . /etc/bash_completion
+fi
+
+function jq() {
+  local color
+
+  if [[ $1 == -M ]]; then
+    color=--monochrome-output
+    shift
+  else
+    color=--color-output
+  fi
+
+  /usr/local/bin/jq $color "$@"
+}
+
+function GET() {
+  if [[ $1 == -M ]]; then
+    mono=-M
+    shift
+  fi
+
+  /usr/bin/curl "$@" | jq $mono .
+}
+
+function EVTGET() {
+  if [[ $1 == -M ]]; then
+    mono=-M
+    shift
+  fi
+
+  GET $mono -Hauthorization:$EVT_API_KEY -Haccept:application/json $EVT_API"$@"
+}
+export EVT_API=https://api.evrythng.com
 
 # [[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
 
