@@ -61,12 +61,12 @@ if hash brew 2>/dev/null; then
   MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
 fi
 
-if hash /usr/local/etc/profile.d/bash_completion.sh 2>/dev/null; then
+if [ -x /usr/local/etc/profile.d/bash_completion.sh ]; then
   . /usr/local/etc/profile.d/bash_completion.sh
   export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-elif hash /usr/share/bash-completion/bash_completion 2>/dev/null; then
+elif [ -x /usr/share/bash-completion/bash_completion ]; then
   . /usr/share/bash-completion/bash_completion
-elif hash /etc/bash_completion 2>/dev/null; then
+elif [ -x /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
