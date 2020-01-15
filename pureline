@@ -25,7 +25,7 @@ function my_virtual_env_module {
 }
 
 declare -a PL_MODULES_ITERM
-if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+if [ "$TERM_PROGRAM" = "iTerm.app" ] || [ "$LC_TERMINAL" = "iTerm2" ]; then
   PL_MODULES_ITERM=('iterm2_mark_module')
 fi
 
