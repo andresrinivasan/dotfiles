@@ -31,7 +31,7 @@ fi
 
 declare -a PL_MODULES_PREFIX
 declare -a PL_MODULES_SUFFIX
-if [ $LINES -lt 26 ]; then
+if [ x$LINES != x ] && [ $LINES -lt 26 ]; then
   PL_MODULES_PREFIX=("${PL_MODULES_ITERM[@]}")
 else
   PL_MODULES_SUFFIX=(
