@@ -62,4 +62,4 @@ PL_PATH_TRIM=4 # 0 Full path, 1, Current, 2+ trim level
 PL_SSH_SHOW_HOST=false
 
 PL_SYMBOLS[ssh]="𝔖"
-PL_SYMBOLS[git_modified]=""
+PL_SYMBOLS[git_modified]="✚"
