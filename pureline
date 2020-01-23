@@ -7,6 +7,7 @@ PL_SYMBOLS[ssh]="𝔖"
 PL_SYMBOLS[git_modified]="✚"
 PL_SYMBOLS[git_staged]="✔"
 PL_SYMBOLS[git_conflicts]="✘"
+PL_SYMBOLS[git_branch]=""
 
 export ITERM2_SQUELCH_MARK=YES
 function iterm2_mark_module() {
