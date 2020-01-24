@@ -102,6 +102,15 @@ function EVTGET() {
 }
 export EVT_API=https://api.evrythng.com
 
+## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
+function tabtitle {
+  if [ -z $TMUX ] ; then
+    printf "\e]1;%s\a" "$@"
+  else
+    tmux rename-window "$@"
+  fi
+}
+
 # [[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
 
 ## Extra stuff that shouldn't go into GitHub
