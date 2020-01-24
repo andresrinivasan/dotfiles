@@ -14,8 +14,7 @@
 #         echo -ne "\033]0;${PWD/#$HOME/'~'} | ${HOSTNAME} | ${BASH_COMMAND}\007"
 #       fi
 #       ;;
-
-#     esac
+#   esac
 # }
 # trap set_title_bar DEBUG
 # export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~} | ${HOSTNAME} | bash\007"'
@@ -34,20 +33,8 @@
 
 # export PS1=': \W\$ '
 
-# if [ "$TERM" != "linux" ]; then
-#   . ~/repos/pureline/pureline ~/.pureline
-# fi
-
-# if [ "$TERM_PROGRAM" != "vscode" ]; then
-#   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-#   test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-# fi
-
 export HISTCONTROL=ignoreboth
 export LESS=-FRX
-
-# export NVM_DIR="$HOME/.nvm"
-# [[ -s /usr/local/opt/nvm/nvm.sh ]] && . /usr/local/opt/nvm/nvm.sh
 
 export GOPATH=~/go
 export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
@@ -103,15 +90,13 @@ function EVTGET() {
 export EVT_API=https://api.evrythng.com
 
 ## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
-function tabtitle {
+function set-tab-title {
   if [ -z $TMUX ] ; then
     printf "\e]1;%s\a" "$@"
   else
     tmux rename-window "$@"
   fi
 }
-
-# [[ -s $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion  # This loads nvm bash_completion
 
 ## Extra stuff that shouldn't go into GitHub
 [[ -s ~/.bash_extras ]] && . ~/.bash_extras
