@@ -41,6 +41,10 @@ function set-tab-title() {
   fi
 }
 
+function forward-port() {
+  ssh -fN -L $1:localhost:$1 $2
+}
+
 if uname | grep  -Fiq darwin; then
   function reset-trustedpeer() {
     rm -f ~/Library/Keychains/*/com.apple.security.keychain-defaultContext.TrustedPeersHelper.{db,db-shm,db-wal}
