@@ -41,7 +41,7 @@ function set-tab-title() {
   fi
 }
 
-if $(uname | fgrep -iq darwin); then
+if uname | grep  -Fiq darwin; then
   function reset-trustedpeer() {
     rm -f ~/Library/Keychains/*/com.apple.security.keychain-defaultContext.TrustedPeersHelper.{db,db-shm,db-wal}
     tpctl reset
