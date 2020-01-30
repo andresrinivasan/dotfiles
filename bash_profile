@@ -57,47 +57,6 @@ elif [ -r /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-function jq() {
-  local color
-
-  if [[ $1 == -M ]]; then
-    color=--monochrome-output
-    shift
-  else
-    color=--color-output
-  fi
-
-  /usr/local/bin/jq $color "$@"
-}
-
-function GET() {
-  if [[ $1 == -M ]]; then
-    mono=-M
-    shift
-  fi
-
-  /usr/bin/curl "$@" | jq $mono .
-}
-
-function EVTGET() {
-  if [[ $1 == -M ]]; then
-    mono=-M
-    shift
-  fi
-
-  GET $mono -Hauthorization:$EVT_API_KEY -Haccept:application/json $EVT_API"$@"
-}
-export EVT_API=https://api.evrythng.com
-
-## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
-function set-tab-title {
-  if [ -z $TMUX ] ; then
-    printf "\e]1;%s\a" "$@"
-  else
-    tmux rename-window "$@"
-  fi
-}
-
 ## Extra stuff that shouldn't go into GitHub
 [[ -s ~/.bash_extras ]] && . ~/.bash_extras
 
@@ -106,5 +65,7 @@ if [ -f '/Users/andresrinivasan/.google-cloud-sdk/path.bash.inc' ]; then source 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc' ]; then source '/Users/andresrinivasan/.google-cloud-sdk/completion.bash.inc'; fi
+
+. ~/.bash-funcs
 
 . ~/.bashrc

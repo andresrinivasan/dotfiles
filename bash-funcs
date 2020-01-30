@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+function jq() {
+  local color
+
+  if [[ $1 == -M ]]; then
+    color=--monochrome-output
+    shift
+  else
+    color=--color-output
+  fi
+
+  /usr/local/bin/jq $color "$@"
+}
+
+function GET() {
+  if [[ $1 == -M ]]; then
+    mono=-M
+    shift
+  fi
+
+  /usr/bin/curl "$@" | jq $mono .
+}
+
+function EVTGET() {
+  if [[ $1 == -M ]]; then
+    mono=-M
+    shift
+  fi
+
+  GET $mono -Hauthorization:$EVT_API_KEY -Haccept:application/json $EVT_API"$@"
+}
+export EVT_API=https://api.evrythng.com
+
+## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
+function set-tab-title() {
+  if [ -z $TMUX ]; then
+    printf "\e]1;%s\a" "$@"
+  else
+    tmux rename-window "$@"
+  fi
+}
+
+if $(uname | fgrep -iq darwin); then
+  function reset-trustedpeer() {
+    rm -f ~/Library/Keychains/*/com.apple.security.keychain-defaultContext.TrustedPeersHelper.{db,db-shm,db-wal}
+    tpctl reset
+    tpctl local-reset
+  }
+
+  function restart-audiod() {
+    sudo killall coreaudiod
+  }
+
+  function use-google-dns() {
+    sudo networksetup -setdnsservers Wi-Fi empty
+    sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
+    sudo killall -HUP mDNSResponder
+  }
+fi
