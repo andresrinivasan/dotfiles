@@ -42,7 +42,7 @@ function set-tab-title() {
 }
 
 function forward-port() {
-  ssh -fN -L $1:localhost:$1 $2
+  ssh -fN -L "$1":localhost:"$1" "$2"
 }
 
 if uname | grep  -Fiq darwin; then
