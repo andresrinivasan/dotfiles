@@ -51,12 +51,12 @@ declare -a PL_MODULES=(
 
   # Module                Background  Foreground
   'time_module            MyLightGrey Black'
-  'ssh_module             MyYellow    Black'
-  'my_virtual_env_module  MyLime      Black'
-  'path_module            MyBlue      Black'
+  'ssh_module             MyYellow    White'
+  'my_virtual_env_module  MyLime      White'
+  'path_module            MyBlue      White'
   'read_only_module       MyRed       White'
   'background_jobs_module MyPurple    White'
-  'git_module             MyGreen     Black'
+  'git_module             MyGreen     MyRed'
   'return_code_module     MyRed       White'
   "${PL_MODULES_SUFFIX[@]}"
   'prompt_module          MyDarkGrey  White'
@@ -65,3 +65,5 @@ declare -a PL_MODULES=(
 # Module Options
 PL_PATH_TRIM=4 # 0 Full path, 1, Current, 2+ trim level
 PL_SSH_SHOW_HOST=false
+PL_GIT_DIRTY_FG=MyRed
+PL_GIT_DIRTY_BG=MyGreen
