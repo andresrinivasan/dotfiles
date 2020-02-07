@@ -65,5 +65,5 @@ declare -a PL_MODULES=(
 # Module Options
 PL_PATH_TRIM=4 # 0 Full path, 1, Current, 2+ trim level
 PL_SSH_SHOW_HOST=false
-PL_GIT_DIRTY_FG=MyRed
-PL_GIT_DIRTY_BG=MyGreen
+PL_GIT_DIRTY_FG=MyGreen
+PL_GIT_DIRTY_BG=MyOrange
