@@ -51,7 +51,7 @@ declare -a PL_MODULES=(
   "${PL_MODULES_PREFIX[@]}"
 
   # Module                Background  Foreground
-  'time_module            MyLightGrey Black'
+##  'time_module            MyLightGrey Black'
   'ssh_module             MyYellow    Black'
   'my_virtual_env_module  MyLime      White'
   'path_module            MyBlue      White'
