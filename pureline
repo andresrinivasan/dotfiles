@@ -3,6 +3,7 @@
 # Full example config for PureLine using default powerline symbols
 # and custom 256 color
 . ~/repos/pureline/configs/powerline_full_256col.conf
+
 PL_SYMBOLS[ssh]="𝔖"
 PL_SYMBOLS[git_modified]="✚"
 PL_SYMBOLS[git_staged]="✔"
