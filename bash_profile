@@ -44,8 +44,8 @@ export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
 
 PATH=~/bin:~/.poetry/bin:${GOPATH//://bin:}/bin:$PATH
 if hash brew 2>/dev/null; then
-  PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl/bin:$PATH
-  MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl/share/man:$MANPATH"
+  PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl@1.1/bin:$PATH
+  MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl@1.1/share/man:$MANPATH"
 fi
 
 if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
