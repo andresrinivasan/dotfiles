@@ -1,15 +1,16 @@
 # This is Git's per-user configuration file.
 [user]
-	name = Andre Srinivasan
+	name = André Srinivasan
 	email = andre.srinivasan@gmail.com
-	signingkey = 23CFFEC9C545E50E
+	##signingkey = 23CFFEC9C545E50E
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [core]
 	excludesfile = /Users/andresrinivasan/.gitignore_global
 	hooksPath = /Users/andresrinivasan/.git-hooks
+	editor = vi
 [commit]
-	gpgsign = true
+	##gpgsign = true
 [pull]
 	rebase = true
 [pretty]
