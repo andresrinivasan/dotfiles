@@ -6,7 +6,7 @@
 * Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
 * FuraCode-Retina (FiraCode Nerd Font) for VSCode
 
-```
+```sh
 brew tap homebrew/cask-fonts
 brew cask install font-dejavusansmono-nerd-font
 brew cask install font-firacode-nerd-font
@@ -23,9 +23,11 @@ brew cask install font-firacode-nerd-font
 * et
 * ssh
 * git
+* git-extras
+* hub
 * go
 * Redis
 * socat
 * Python 3
 * Iterm 2
-* 
+* VSC
