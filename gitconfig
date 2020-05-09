@@ -6,9 +6,13 @@
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [core]
-	excludesfile = /Users/andresrinivasan/.gitignore_global
-	hooksPath = /Users/andresrinivasan/.git-hooks
+	excludesfile =~/.gitignore_global
+	hooksPath = ~/.git-hooks
 	editor = vi
+	pager = less -R
+	autocrlf = input
+[credential]
+	helper = osxkeychain
 [commit]
 	##gpgsign = true
 [pull]
