@@ -1,6 +1,5 @@
 # dot-files
 
-
 ## Fonts
 
 * Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
