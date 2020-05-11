@@ -1,3 +1,5 @@
+LogLevel ERROR
+
 Host *
   ExitOnForwardFailure yes
   ServerAliveInterval 60
