@@ -8,9 +8,9 @@ Host *
 
 Host github.com
   Hostname github.com
-  IdentityFile ~/.ssh/github_rsa
+  IdentityFile ~/.ssh/github-rsa
 
 Host bitbucket.org
   Hostname bitbucket.org
-  IdentityFile ~/.ssh/andresrinivasan-Bitbucket
+  IdentityFile ~/.ssh/bitbucket-rsa
 
