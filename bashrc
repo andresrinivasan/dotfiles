@@ -16,3 +16,7 @@ if hash dircolors 2>/dev/null; then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
+
+alias k=kubectl
+complete -F __start_kubectl k
+

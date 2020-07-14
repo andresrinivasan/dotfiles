@@ -42,7 +42,7 @@ export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 
-PATH=~/bin:~/.poetry/bin:${GOPATH//://bin:}/bin:$PATH
+PATH=~/bin:~/.krew/bin:~/.poetry/bin:${GOPATH//://bin:}/bin:$PATH
 if hash brew 2>/dev/null; then
   PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl@1.1/bin:$PATH
   MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl@1.1/share/man:$MANPATH"
