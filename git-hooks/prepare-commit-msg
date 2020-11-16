@@ -5,15 +5,17 @@
 NAME=$(git config user.name)
 EMAIL=$(git config user.email)
 
-if [ -z "$NAME" ]; then
-    echo "empty git config user.name"
-    exit 1
-fi
+## Checking $NAME and $EMAIL is no longer needed as git commit already checks
+##
+##if [ -z "$NAME" ]; then
+##    echo "Please set user.name with git config user.name"
+##    exit 1
+##fi
 
-if [ -z "$EMAIL" ]; then
-    echo "empty git config user.email"
-    exit 1
-fi
+##if [ -z "$EMAIL" ]; then
+##    echo "Pleasae set user.email with git config user.email"
+##    exit 1
+##fi
 
 git interpret-trailers --if-exists doNothing --trailer \
     "Signed-off-by: $NAME <$EMAIL>" \
