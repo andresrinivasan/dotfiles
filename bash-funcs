@@ -34,9 +34,9 @@ export EVT_API=https://api.evrythng.com
 
 ## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
 function set-tab-title() {
-  title=${@:-$(basename $(pwd))}
+  title=${*:-$(basename $(pwd))}
 
-  if [ -z $TMUX ]; then
+  if [ -z ${TMUX} ]; then
     printf "\e]1;%s\a" "${title}"
   else
     tmux rename-window "${title}"
