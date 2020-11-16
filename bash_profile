@@ -35,10 +35,10 @@
 
 export HISTCONTROL=ignoreboth
 export LESS=-FRX
+export VISUAL=vi
 
-export GOPATH=~/go
-export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
-export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
+##export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
+##export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 
