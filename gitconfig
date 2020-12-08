@@ -10,7 +10,7 @@
 	pager = less -R
 	autocrlf = input
 [credential]
-	helper = osxkeychain
+	##helper = osxkeychain
 [commit]
 	##gpgsign = true
 [pull]
