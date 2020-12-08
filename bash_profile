@@ -38,11 +38,10 @@ export LESS=-FRX
 export VISUAL=vi
 
 ##export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
-##export POETRY_VIRTUALENVS_PATH=~/.virtualenvs
 
 ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 
-PATH=~/bin:~/.krew/bin:~/.poetry/bin:${GOPATH//://bin:}/bin:$PATH
+PATH=~/bin:~/.krew/bin:$PATH
 if hash brew 2>/dev/null; then
   PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl@1.1/bin:$PATH
   MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl@1.1/share/man:$MANPATH"
@@ -50,22 +49,30 @@ fi
 
 if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
   export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+  # shellcheck source=/dev/null
   . /usr/local/etc/profile.d/bash_completion.sh
 elif [ -r /usr/share/bash-completion/bash_completion ]; then
+  # shellcheck source=/dev/null
   . /usr/share/bash-completion/bash_completion
 elif [ -r /etc/bash_completion ]; then
+  # shellcheck source=/dev/null
   . /etc/bash_completion
 fi
 
-## Extra stuff that shouldn't go into GitHub
-[[ -s ~/.bash_extras ]] && . ~/.bash_extras
-
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f ~/.google-cloud-sdk/path.bash.inc ]; then source ~/.google-cloud-sdk/path.bash.inc; fi
+# shellcheck source=/dev/null
+if [ -f ~/.google-cloud-sdk/path.bash.inc ]; then . ~/.google-cloud-sdk/path.bash.inc; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f ~/.google-cloud-sdk/completion.bash.inc ]; then source ~/.google-cloud-sdk/completion.bash.inc; fi
+# shellcheck source=/dev/null
+if [ -f ~/.google-cloud-sdk/completion.bash.inc ]; then . ~/.google-cloud-sdk/completion.bash.inc; fi
 
+## Extra stuff that shouldn't go into GitHub
+# shellcheck source=/dev/null
+if [ -f ~/.bash_extras ]; then . ~/.bash_extras; fi
+
+# shellcheck source=/dev/null
 . ~/.bash-funcs
 
+# shellcheck source=/dev/null
 . ~/.bashrc
