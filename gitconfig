@@ -3,8 +3,6 @@
 	name = André Srinivasan
 	useConfigOnly = true
 	##signingkey = 23CFFEC9C545E50E
-[url "git@github.com:"]
-    insteadOf = https://github.com/
 [core]
 	excludesfile =~/.gitignore_global
 	hooksPath = ~/.git-hooks
@@ -26,7 +24,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[hub]
-	protocol = ssh
 [rebase]
 	autoStash = true
