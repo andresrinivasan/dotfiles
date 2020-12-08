@@ -11,9 +11,9 @@ fi
 alias k=kubectl
 complete -F __start_kubectl k
 
-## Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
-## then needs this. The order is also important as iTerm shell integration preserves existing prompt
-## commands and pureline does not.
+# Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
+# then needs this. The order is also important as iTerm shell integration preserves existing prompt
+# commands and pureline does not.
 
 if [ "$TERM" != "linux" ]; then
   # shellcheck source=/dev/null
