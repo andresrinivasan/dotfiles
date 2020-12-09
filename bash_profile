@@ -47,26 +47,6 @@ if hash brew 2>/dev/null; then
   MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl@1.1/share/man:$MANPATH"
 fi
 
-if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
-  export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-  # shellcheck source=/dev/null
-  . /usr/local/etc/profile.d/bash_completion.sh
-elif [ -r /usr/share/bash-completion/bash_completion ]; then
-  # shellcheck source=/dev/null
-  . /usr/share/bash-completion/bash_completion
-elif [ -r /etc/bash_completion ]; then
-  # shellcheck source=/dev/null
-  . /etc/bash_completion
-fi
-
-# The next line updates PATH for the Google Cloud SDK.
-# shellcheck source=/dev/null
-if [ -f ~/.google-cloud-sdk/path.bash.inc ]; then . ~/.google-cloud-sdk/path.bash.inc; fi
-
-# The next line enables shell command completion for gcloud.
-# shellcheck source=/dev/null
-if [ -f ~/.google-cloud-sdk/completion.bash.inc ]; then . ~/.google-cloud-sdk/completion.bash.inc; fi
-
 ## Extra stuff that shouldn't go into GitHub
 # shellcheck source=/dev/null
 if [ -f ~/.bash_extras ]; then . ~/.bash_extras; fi
