@@ -6,7 +6,8 @@ case $- in
       *) return;;
 esac
 
-# append to the history file, don't overwrite it
+# append to the history file and trim it to 1000 lines
+export HISTFILESIZE=1000
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
