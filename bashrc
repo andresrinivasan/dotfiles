@@ -58,6 +58,7 @@ fi
 
 if [ "$TERM_PROGRAM" != "vscode" ]; then
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+  export iterm2_hostname=${HOSTNAME//andre/gcp}
   # shellcheck source=/dev/null
   test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
 fi
