@@ -25,9 +25,6 @@ if hash dircolors 2>/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
-alias k=kubectl
-complete -F __start_kubectl k
-
 if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
   export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
   # shellcheck source=/dev/null
@@ -39,6 +36,9 @@ elif [ -r /etc/bash_completion ]; then
   # shellcheck source=/dev/null
   . /etc/bash_completion
 fi
+
+alias k=kubectl
+complete -F __start_kubectl k
 
 # shellcheck source=/dev/null
 for gcpsdkpath in ~/.google-cloud-sdk /snap/google-cloud-sdk/current; do
