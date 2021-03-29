@@ -2,12 +2,12 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # append to the history file and trim it to 1000 lines
-export HISTFILESIZE=1000
+HISTFILESIZE=1000
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
@@ -63,3 +63,10 @@ if [ "$TERM_PROGRAM" != "vscode" ]; then
   # shellcheck source=/dev/null
   test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
 fi
+
+## Extra stuff that shouldn't go into GitHub
+# shellcheck source=/dev/null
+if [ -f ~/.bash_extras ]; then . ~/.bash_extras; fi
+
+# shellcheck source=/dev/null
+. ~/.bash-funcs

@@ -30,7 +30,7 @@ function EVTGET() {
 
   GET $mono -Hauthorization:$EVT_API_KEY -Haccept:application/json $EVT_API"$@"
 }
-export EVT_API=https://api.evrythng.com
+EVT_API=https://api.evrythng.com
 
 ## From https://superuser.com/questions/702156/rename-iterm2-tab-from-within-tmux
 function set-tab-title() {
@@ -47,7 +47,7 @@ function forward-port() {
   ssh -fN -L "$1":localhost:"$1" "$2"
 }
 
-if uname | grep  -Fiq darwin; then
+if uname | grep -Fiq darwin; then
   function reset-trustedpeer() {
     rm -f ~/Library/Keychains/*/com.apple.security.keychain-defaultContext.TrustedPeersHelper.{db,db-shm,db-wal}
     tpctl reset
