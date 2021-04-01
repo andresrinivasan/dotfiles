@@ -1,4 +1,3 @@
-# This is Git's per-user configuration file.
 [user]
 	name = André Srinivasan
 	useConfigOnly = true
@@ -26,3 +25,22 @@
 	required = true
 [rebase]
 	autoStash = true
+
+# Enforce SSH, most of the time
+
+## Might be needed
+##[includeIf "gitdir:Homebrew/"]
+##	path = config.homebrew
+
+# in ~/.config/git/config.homebrew
+##[url "https://github.com/"]
+##	insteadOf = git@github.com:
+##	insteadOf = https://github.com/
+
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[url "ssh://git@gitlab.com/"]
+  insteadOf = https://gitlab.com/
+[url "ssh://git@bitbucket.org/"]
+  insteadOf = https://bitbucket.org
+
