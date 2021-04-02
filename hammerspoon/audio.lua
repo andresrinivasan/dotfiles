@@ -30,11 +30,8 @@ end
 -- hs.audiodevice.watcher.setCallback(audioDeviceChanged)
 -- hs.audiodevice.watcher.start()
 
-function audiowatch(arg)
-  print(string.format("Audiowatch arg: %s", arg))
-end
-
-hs.audiodevice.watcher.setCallback(audiowatch)
+-- XXX Work around bug where unset system audio watcher generates warnings
+hs.audiodevice.watcher.setCallback(function(arg) end)
 hs.audiodevice.watcher.start()
 
 -- Inspired by https://www.tunabellysoftware.com/balance_lock/
@@ -48,15 +45,20 @@ local function resetBalance(uid, event, scope, element)
 end
 
 local function selectJack(uid, event, scope, element)
-  if event =="jack" then
-    if builtinIn:jackConnected() then
+  if event == "jack" and builtinIn:jackConnected() then
       setDefaultAudioDevice(builtinIn, builtinOut)
     end
-  end
 end
 
+local function notifyDefaultAudio()
+  hs.notify.show("Audio", "Default audio device", hs.audiodevice.defaultInputDevice():name())
+end
+
+audioWatchers = {}      -- Does this change GC? I don't thonk so...
+
 for i,dev in ipairs(hs.audiodevice.allOutputDevices()) do
-  dev:watcherCallback(resetBalance):watcherStart()
+  audioWatchers[dev:name()] = dev:watcherCallback(resetBalance)
+  dev:watcherStart()
   print(dev:watcherIsRunning())
 end
 
@@ -64,14 +66,15 @@ for i,dev in ipairs(hs.audiodevice.allOutputDevices()) do   -- XXX Bug. Prints f
   print(dev:watcherIsRunning())
 end
 
-builtinIn:watcherCallback(selectJack):watcherStart()
+audioWatchers[builtinIn:name()] = builtinIn:watcherCallback(selectJack)
+builtinIn:watcherStart()
 
 hs.hotkey.bind(ctrl_opt, "f7", function()
   setDefaultAudioDevice(link370In, link370Out)
 end)
 
 hs.hotkey.bind(ctrl_opt, "f8", function()
-  hs.notify.show("Audio", "Default audio device", hs.audiodevice.defaultInputDevice():name())
+  notifyDefaultAudio()
 end)
 
 hs.hotkey.bind(ctrl_opt, "f9", function()

@@ -1,5 +1,3 @@
-
-
 local function appEvent(name, event, app)
   if name == "Music" and event == hs.application.watcher.launching then
     app:hide()
