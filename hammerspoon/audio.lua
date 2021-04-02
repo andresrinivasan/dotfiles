@@ -54,7 +54,7 @@ local function notifyDefaultAudio()
   hs.notify.show("Audio", "Default audio device", hs.audiodevice.defaultInputDevice():name())
 end
 
-audioWatchers = {}      -- Does this change GC? I don't thonk so...
+audioWatchers = {}      -- Does this change GC? I don't think so...
 
 for i,dev in ipairs(hs.audiodevice.allOutputDevices()) do
   audioWatchers[dev:name()] = dev:watcherCallback(resetBalance)
