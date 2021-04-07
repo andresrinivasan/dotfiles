@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+## From https://www.commandlinefu.com/commands/view/12043/remove-color-special-escape-ansi-codes-from-text-with-sed
+
+sed 's,\x1B\[[0-9;]*[a-zA-Z],,g'
