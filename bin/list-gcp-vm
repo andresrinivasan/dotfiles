@@ -2,7 +2,7 @@
 
 export PREFIX=andre
 
-gcloud compute instances list --format=json | jq '[ 
+gcloud compute instances list --format=json | jq "$@" '[ 
   .[] | select(.name | test("^" + env.PREFIX)) | .shortZone = (.zone | split("/"))[-1] 
   | {name} + {"zone": .shortZone} 
   + (.networkInterfaces[] | (.accessConfigs[] | {natIP}) + {"internal-ip": .networkIP}) 

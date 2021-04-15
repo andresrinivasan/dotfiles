@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+list-gcp-vm -M | jq -r '.[] | select(.status == "RUNNING") | .stop' | while read c; do eval "$c"; done
+
