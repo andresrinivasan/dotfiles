@@ -41,9 +41,24 @@ spoon.MiroWindowsManager:bindHotkeys({
 -- )
 
 noItunes = require("no-itunes")
+
 audio = require("audio")
+-- link370 = addPreferredAudio("Jabra Link", "Jabra Link 370", "Jabra Link 370")
+-- builtIn = addPreferredAudio(BUILTIN_AUDIO)
+-- setPreferWiredHeadset()
+
+hs.hotkey.bind(ctrl_opt, "f7", function()
+  setDefaultAudioDevice(link370In, link370Out)
+end)
+hs.hotkey.bind(ctrl_opt, "f8", function()
+  notifyDefaultAudio()
+end)
+hs.hotkey.bind(ctrl_opt, "f9", function()
+  setDefaultAudioDevice(builtinIn, builtinOut)
+end)
+
+-- Better format-less pasting and bypass JavaScript field pasting blocks
+hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- Add /usr/local/bin/hs REPL
 hs.ipc.cliInstall()
-
-hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)

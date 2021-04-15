@@ -1,9 +1,11 @@
-local builtinIn = hs.audiodevice.findInputByName("Built-in Microphone")
-local builtinOut = hs.audiodevice.findOutputByName("Built-in Output")
-local link370In = hs.audiodevice.findInputByName("Jabra Link 370")
-local link370Out = hs.audiodevice.findOutputByName("Jabra Link 370")
+BUILTIN_AUDIO="Built-in"
 
-local function setDefaultAudioDevice(deviceIn, deviceOut)
+builtinIn = hs.audiodevice.findInputByName("Built-in Microphone")
+builtinOut = hs.audiodevice.findOutputByName("Built-in Output")
+link370In = hs.audiodevice.findInputByName("Jabra Link 370")
+link370Out = hs.audiodevice.findOutputByName("Jabra Link 370")
+
+function setDefaultAudioDevice(deviceIn, deviceOut)
   if deviceIn:setDefaultInputDevice() and deviceOut:setDefaultOutputDevice() then
     status = "Succeeded"
   else
@@ -32,7 +34,6 @@ end
 
 -- XXX Work around bug where unset system audio watcher generates warnings
 hs.audiodevice.watcher.setCallback(function(arg) end)
-hs.audiodevice.watcher.start()
 
 -- Inspired by https://www.tunabellysoftware.com/balance_lock/
 local function resetBalance(uid, event, scope, element)
@@ -69,14 +70,3 @@ end
 audioWatchers[builtinIn:name()] = builtinIn:watcherCallback(selectJack)
 builtinIn:watcherStart()
 
-hs.hotkey.bind(ctrl_opt, "f7", function()
-  setDefaultAudioDevice(link370In, link370Out)
-end)
-
-hs.hotkey.bind(ctrl_opt, "f8", function()
-  notifyDefaultAudio()
-end)
-
-hs.hotkey.bind(ctrl_opt, "f9", function()
-  setDefaultAudioDevice(builtinIn, builtinOut)
-end)
