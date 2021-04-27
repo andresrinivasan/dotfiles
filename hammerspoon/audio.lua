@@ -1,9 +1,15 @@
 BUILTIN_AUDIO="Built-in"
 
+useWiredHeadset = false
+
 builtinIn = hs.audiodevice.findInputByName("Built-in Microphone")
 builtinOut = hs.audiodevice.findOutputByName("Built-in Output")
 link370In = hs.audiodevice.findInputByName("Jabra Link 370")
 link370Out = hs.audiodevice.findOutputByName("Jabra Link 370")
+
+function setAlwaysUseWiredHeadset()
+  useWiredHeadset = true
+end
 
 function setDefaultAudioDevice(deviceIn, deviceOut)
   if deviceIn:setDefaultInputDevice() and deviceOut:setDefaultOutputDevice() then
@@ -46,7 +52,7 @@ local function resetBalance(uid, event, scope, element)
 end
 
 local function selectJack(uid, event, scope, element)
-  if event == "jack" and builtinIn:jackConnected() then
+  if event == "jack" and builtinIn:jackConnected() and useWiredHeadset then
       setDefaultAudioDevice(builtinIn, builtinOut)
     end
 end

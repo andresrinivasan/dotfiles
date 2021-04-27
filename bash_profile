@@ -42,13 +42,19 @@ if [ ! -v BASH_PROFILE ]; then
 
   ##export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
 
-  PATH=~/bin:~/.krew/bin:$PATH
-
   ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
   if hash brew 2>/dev/null; then
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:/usr/local/opt/openssl@1.1/bin:$PATH
-    MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:/usr/local/opt/openssl@1.1/share/man:$MANPATH"
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:$PATH
+    MANPATH=/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH
+
+    r=/usr/local/opt
+    for p in openssl curl; do
+      PATH=$r/$p/bin:$PATH
+      MANPATH=$r/$p/man:$MANPATH
+    done
   fi
+
+  PATH=~/bin:~/.krew/bin:$PATH
 fi
 
 # shellcheck source=/dev/null

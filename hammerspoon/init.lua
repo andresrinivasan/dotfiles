@@ -45,7 +45,7 @@ noItunes = require("no-itunes")
 audio = require("audio")
 -- link370 = addPreferredAudio("Jabra Link", "Jabra Link 370", "Jabra Link 370")
 -- builtIn = addPreferredAudio(BUILTIN_AUDIO)
--- setPreferWiredHeadset()
+-- setAlwaysUseWiredHeadset()
 
 hs.hotkey.bind(ctrl_opt, "f7", function()
   setDefaultAudioDevice(link370In, link370Out)
