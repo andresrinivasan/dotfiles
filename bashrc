@@ -25,10 +25,11 @@ if hash dircolors 2>/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
-if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
+if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then   ## This is brew installed
   export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
   # shellcheck source=/dev/null
   . /usr/local/etc/profile.d/bash_completion.sh
+  ## XXX source all the files in ~/.local/share/bash-completion/completions
 elif [ -r /usr/share/bash-completion/bash_completion ]; then
   # shellcheck source=/dev/null
   . /usr/share/bash-completion/bash_completion
@@ -37,6 +38,8 @@ elif [ -r /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+## XXX Check for kubectl, check for completion, create it if missing, and source it
+## XXX Ditto for oc
 alias k=kubectl
 complete -F __start_kubectl k
 
