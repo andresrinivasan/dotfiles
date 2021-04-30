@@ -7,9 +7,7 @@ gcloud compute instances list --format=json | jq "$@" '[
   | select(.name | test("^" + env.PREFIX)) 
   | .shortZone = (.zone | split("/"))[-1] 
   | {name} + {"zone": .shortZone} 
-  + (.networkInterfaces[] 
-    | (select(.accessConfigs != null) | (.accessConfigs[] | {natIP}))
-      , {"internal-ip": .networkIP}) 
+  + (.networkInterfaces[] | (select(.accessConfigs != null) | (.accessConfigs[] | {natIP})) , {"internal-ip": .networkIP}) 
   + {status} 
   + {"start": ("gcloud compute instances start --async " + .name + " --zone=" + .shortZone) }
   + {"stop": ("gcloud compute instances stop --async " + .name + " --zone=" + .shortZone) }
