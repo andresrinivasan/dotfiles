@@ -51,6 +51,8 @@ for gcpsdkpath in ~/.google-cloud-sdk /snap/google-cloud-sdk/current; do
   done
 done
 
+complete -C /usr/local/bin/terraform terraform
+
 # Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
 # then needs this. The order is also important as iTerm shell integration preserves existing prompt
 # commands and pureline does not.
