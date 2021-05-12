@@ -57,7 +57,7 @@ local function selectJack(uid, event, scope, element)
     end
 end
 
-local function notifyDefaultAudio()
+function notifyDefaultAudio()
   hs.notify.show("Audio", "Default audio device", hs.audiodevice.defaultInputDevice():name())
 end
 
