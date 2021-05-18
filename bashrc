@@ -40,6 +40,7 @@ fi
 ## XXX source all the files in ~/.local/share/bash-completion/completions
 ## XXX Check for kubectl, check for completion, create it if missing, and source it
 ## XXX Ditto for oc
+
 alias k=kubectl
 complete -F __start_kubectl k
 
