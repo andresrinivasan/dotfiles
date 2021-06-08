@@ -37,7 +37,7 @@ elif [ -r /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-## XXX source all the files in ~/.local/share/bash-completion/completions
+## XXX source all the files in ~/.local/share/bash-completion/completions. Is this automatic?
 ## XXX Check for kubectl, check for completion, create it if missing, and source it
 ## XXX Ditto for oc
 
@@ -52,7 +52,7 @@ for gcpsdkpath in ~/.google-cloud-sdk /snap/google-cloud-sdk/current; do
   done
 done
 
-complete -C /usr/local/bin/terraform terraform
+complete -C "$(which terraform)" terraform
 
 # Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
 # then needs this. The order is also important as iTerm shell integration preserves existing prompt
