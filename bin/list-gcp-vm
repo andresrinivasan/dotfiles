@@ -1,15 +1,30 @@
-#!/usr/bin/env sh
+#!/usr/bin/env sh 
 
 export PREFIX=andre
 
-gcloud compute instances list --format=json | jq "$@" '[ 
+## XXX jqArg not working
+jqArg=$*
+if [ ! -t 1 ]; then jqArg="${jqArg} -M"; fi
+
+# gcloud compute instances list --format=json | jq '[ 
+#   .[] 
+#   | select(.name | test("^" + env.PREFIX)) 
+#   | .shortZone = (.zone | split("/"))[-1] 
+#   | .addresses = [(.networkInterfaces | {"privateIP": map(.networkIP)}, {"publicIP": (map(.accessConfigs)? | map(map(.natIP)) | .[])})]
+#   | {name} + {addresses}
+# ]'
+
+gcloud compute instances list --format=json | jq '[ 
   .[] 
   | select(.name | test("^" + env.PREFIX)) 
   | .shortZone = (.zone | split("/"))[-1] 
   | {name} 
     + {"zone": .shortZone} 
-    + (.networkInterfaces[] | (select(.accessConfigs != null) | (.accessConfigs[] | {natIP})) , {"internal-ip": .networkIP}) 
-    + {status} 
-    + {"start": ("gcloud compute instances start --async " + .name + " --zone=" + .shortZone) }
-    + {"stop": ("gcloud compute instances stop --async " + .name + " --zone=" + .shortZone) }
+    + {status}
+    + (.networkInterfaces | {"privateIP": map(.networkIP)} + {"publicIP": (map(.accessConfigs) | map(map(.natIP)) | .[])})
+    + {"start": ("gcloud compute instances start --async " + .name + " --zone=" + .shortZone)}
+    + {"stop": ("gcloud compute instances stop --async " + .name + " --zone=" + .shortZone)}
 ]'
+
+    # + (.networkInterfaces[] | (if .accessConfigs != null then (.accessConfigs[] | {natIP}) end) + {networkIP})
+    # + (.networkInterfaces | {"privateIP": map(.networkIP)} + (select(.accessConfigs != null) | {accessConfigs}))
