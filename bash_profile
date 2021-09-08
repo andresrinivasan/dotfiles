@@ -39,6 +39,12 @@ if [ ! -v BASH_PROFILE ]; then
   export HISTCONTROL=ignoreboth
   export LESS=-FRX
   export VISUAL=vi
+  export PERL_HOMEDIR=0
+
+  export DOCKER_TLS_VERIFY="1"
+  export DOCKER_CERT_PATH="/Users/andresrinivasan/.minikube/certs"
+  export MINIKUBE_ACTIVE_DOCKERD="minikube"
+
 
   ##export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
 
