@@ -57,8 +57,7 @@ hs.hotkey.bind(ctrl_opt, "f9", function()
   setDefaultAudioDevice(builtinIn, builtinOut)
 end)
 
--- Better format-less pasting and bypass JavaScript field pasting blocks
-hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+paste = require("paste")
 
 -- Add /usr/local/bin/hs REPL
 hs.ipc.cliInstall()
