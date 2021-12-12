@@ -53,6 +53,7 @@ for gcpsdkpath in ~/.google-cloud-sdk /snap/google-cloud-sdk/current; do
 done
 
 complete -C "$(which terraform)" terraform
+eval "$($(which gh) completion -s bash))"
 
 # Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
 # then needs this. The order is also important as iTerm shell integration preserves existing prompt
