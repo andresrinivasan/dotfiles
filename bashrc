@@ -45,7 +45,7 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 # shellcheck source=/dev/null
-for gcpsdkpath in ~/.google-cloud-sdk /snap/google-cloud-sdk/current; do
+for gcpsdkpath in ~/.local/google-cloud-sdk /snap/google-cloud-sdk/current; do
   for sdkfiles in path.bash.inc completion.bash.inc; do
     sdkfile=${gcpsdkpath}/${sdkfiles}
     if [ -f ${sdkfile} ]; then . ${sdkfile}; fi
