@@ -25,10 +25,10 @@ if hash dircolors 2>/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
-if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then   ## This is brew installed
-  export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+if [ "$HOMEBREW_PREFIX" ] && [ -r "$HOMEBREW_PREFIX"/etc/profile.d/bash_completion.sh ]; then   ## This is brew installed
+  export BASH_COMPLETION_COMPAT_DIR="$HOMEBREW_PREFIX"/etc/bash_completion.d
   # shellcheck source=/dev/null
-  . /usr/local/etc/profile.d/bash_completion.sh
+  . "$HOMEBREW_PREFIX"/etc/profile.d/bash_completion.sh
 elif [ -r /usr/share/bash-completion/bash_completion ]; then
   # shellcheck source=/dev/null
   . /usr/share/bash-completion/bash_completion
@@ -37,6 +37,10 @@ elif [ -r /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+# The next line enables shell command completion for gcloud.
+# shellcheck source=/dev/null
+if [ -f '/Users/andre/.local/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/andre/.local/google-cloud-sdk/completion.bash.inc'; fi
+
 ## XXX source all the files in ~/.local/share/bash-completion/completions. Is this automatic?
 ## XXX Check for kubectl, check for completion, create it if missing, and source it
 ## XXX Ditto for oc
@@ -44,32 +48,26 @@ fi
 alias k=kubectl
 complete -F __start_kubectl k
 
-# shellcheck source=/dev/null
-for gcpsdkpath in ~/.local/google-cloud-sdk /snap/google-cloud-sdk/current; do
-  for sdkfiles in path.bash.inc completion.bash.inc; do
-    sdkfile=${gcpsdkpath}/${sdkfiles}
-    if [ -f ${sdkfile} ]; then . ${sdkfile}; fi
-  done
-done
-
 complete -C "$(which terraform)" terraform
 eval "$($(which gh) completion -s bash))"
 
-# Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
-# then needs this. The order is also important as iTerm shell integration preserves existing prompt
-# commands and pureline does not.
+# # Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
+# # then needs this. The order is also important as iTerm shell integration preserves existing prompt
+# # commands and pureline does not.
 
-if [ "$TERM" != "linux" ]; then
-  # shellcheck source=/dev/null
-  . ~/repos/pureline/pureline ~/.pureline
-fi
+# if [ "$TERM" != "linux" ]; then
+#   # shellcheck source=/dev/null
+#   . ~/repos/pureline/pureline ~/.pureline
+# fi
 
-if [ "$TERM_PROGRAM" != "vscode" ]; then
-  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-  export iterm2_hostname=${HOSTNAME//andre/gcp}
-  # shellcheck source=/dev/null
-  test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
-fi
+# if [ "$TERM_PROGRAM" != "vscode" ]; then
+#   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+#   export iterm2_hostname=${HOSTNAME//andre/gcp}
+#   # shellcheck source=/dev/null
+#   test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
+# fi
+
+eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/v"$(oh-my-posh --version)"/themes/powerlevel10k_modern.omp.json)"
 
 ## Extra stuff that shouldn't go into GitHub
 # shellcheck source=/dev/null

@@ -41,23 +41,35 @@ if [ ! -v BASH_PROFILE ]; then
   export VISUAL=vi
   export PERL_HOMEDIR=0
 
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_CERT_PATH="/Users/andresrinivasan/.minikube/certs"
-  export MINIKUBE_ACTIVE_DOCKERD="minikube"
+  # export DOCKER_TLS_VERIFY="1"
+  # export DOCKER_CERT_PATH="/Users/andresrinivasan/.minikube/certs"
+  # export MINIKUBE_ACTIVE_DOCKERD="minikube"
 
+  export GCP_VM_FILTER=andre          ## For list-gcp-vm
 
-  ##export PKG_CONFIG_PATH=/usr/local/Cellar/zeromq/4.3.2/lib/pkgconfig/
+  # shellcheck source=/dev/null
+  export HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
+  if [ "$HOMEBREW_PREFIX" ]; then
+    PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
 
-  ## See https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
-  if hash brew 2>/dev/null; then
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin:/usr/local/opt/python/libexec/bin:$PATH
-    MANPATH=/usr/local/opt/coreutils/share/man:/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH
-
-    r=/usr/local/opt
-    for p in openssl curl; do
-      PATH=$r/$p/bin:$PATH
-      MANPATH=$r/$p/man:$MANPATH
+    for p in coreutils gnu-tar; do
+      PATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/gnubin:"$PATH"
+      MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
     done
+
+    for p in lsof openssl curl; do
+      PATH="$HOMEBREW_PREFIX"/opt/"$p"/bin:"$PATH"
+      MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
+    done
+
+    export HOMEBREW_NO_ENV_HINTS=true
+  fi
+
+  # The next line updates PATH for the Google Cloud SDK.
+  # shellcheck source=/dev/null
+  if [ -f '/Users/andre/.local/google-cloud-sdk/path.bash.inc' ]; then 
+    . '/Users/andre/.local/google-cloud-sdk/path.bash.inc'
+    export USE_GKE_GCLOUD_AUTH_PLUGIN=true
   fi
 
   PATH=~/bin:~/.krew/bin:$PATH
