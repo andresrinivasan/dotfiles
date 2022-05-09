@@ -1,11 +1,5 @@
 #!/usr/bin/env sh 
 
-export PREFIX=andre
-
-## XXX jqArg not working
-jqArg=$*
-if [ ! -t 1 ]; then jqArg="${jqArg} -M"; fi
-
 # gcloud compute instances list --format=json | jq '[ 
 #   .[] 
 #   | select(.name | test("^" + env.PREFIX)) 
@@ -16,7 +10,7 @@ if [ ! -t 1 ]; then jqArg="${jqArg} -M"; fi
 
 gcloud compute instances list --format=json | jq '[ 
   .[] 
-  | select(.name | test("^" + env.PREFIX)) 
+  | select(.name | test("^" + env.GCP_VM_FILTER)) 
   | .shortZone = (.zone | split("/"))[-1] 
   | {name} 
     + {"zone": .shortZone} 
