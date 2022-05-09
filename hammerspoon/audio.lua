@@ -2,8 +2,8 @@ BUILTIN_AUDIO="Built-in"
 
 useWiredHeadset = false
 
-builtinIn = hs.audiodevice.findInputByName("Built-in Microphone")
-builtinOut = hs.audiodevice.findOutputByName("Built-in Output")
+builtinIn = hs.audiodevice.findInputByName("MacBook Pro Microphone")
+builtinOut = hs.audiodevice.findOutputByName("MacBook Pro Speakers")
 link370In = hs.audiodevice.findInputByName("Jabra Link 370")
 link370Out = hs.audiodevice.findOutputByName("Jabra Link 370")
 
@@ -38,12 +38,9 @@ end
 -- hs.audiodevice.watcher.setCallback(audioDeviceChanged)
 -- hs.audiodevice.watcher.start()
 
--- XXX Work around bug where unset system audio watcher generates warnings
-hs.audiodevice.watcher.setCallback(function(arg) end)
-
 -- Inspired by https://www.tunabellysoftware.com/balance_lock/
 local function resetBalance(uid, event, scope, element)
-  if event == "span" or event == "vmvc" then    -- Span should be sufficient per the docs
+  if event == "span" or event == "vmvc" then    -- XXX Span should be sufficient per the docs
     device = hs.audiodevice.findDeviceByUID(uid)
     if device:balance() ~= 0.5 then
       device:setBalance(0.5)
@@ -57,22 +54,21 @@ local function selectJack(uid, event, scope, element)
     end
 end
 
-function notifyDefaultAudio()
+builtinIn:watcherCallback(selectJack)
+builtinIn:watcherStart()
+
+local function notifyDefaultAudio()
   hs.notify.show("Audio", "Default audio device", hs.audiodevice.defaultInputDevice():name())
 end
 
-audioWatchers = {}      -- Does this change GC? I don't think so...
-
-for i,dev in ipairs(hs.audiodevice.allOutputDevices()) do
-  audioWatchers[dev:name()] = dev:watcherCallback(resetBalance)
-  dev:watcherStart()
-  print(dev:watcherIsRunning())
+for i,d in ipairs(hs.audiodevice.allOutputDevices()) do
+  d:watcherCallback(resetBalance)
+  d:watcherStart()
+  print(d:watcherIsRunning())
 end
 
-for i,dev in ipairs(hs.audiodevice.allOutputDevices()) do   -- XXX Bug. Prints false.
-  print(dev:watcherIsRunning())
+for i,d in ipairs(hs.audiodevice.allOutputDevices()) do   -- XXX Bug. Prints false.
+  print(d:watcherIsRunning())
 end
 
-audioWatchers[builtinIn:name()] = builtinIn:watcherCallback(selectJack)
-builtinIn:watcherStart()
 

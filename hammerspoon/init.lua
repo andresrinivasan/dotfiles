@@ -40,24 +40,29 @@ spoon.MiroWindowsManager:bindHotkeys({
 --   }
 -- )
 
-noItunes = require("no-itunes")
+require("no-itunes")
 
-audio = require("audio")
+require("audio")
 -- link370 = addPreferredAudio("Jabra Link", "Jabra Link 370", "Jabra Link 370")
 -- builtIn = addPreferredAudio(BUILTIN_AUDIO)
 -- setAlwaysUseWiredHeadset()
 
-hs.hotkey.bind(ctrl_opt, "f7", function()
+hs.hotkey.bind(ctrl_opt, "F7", function()
   setDefaultAudioDevice(link370In, link370Out)
 end)
-hs.hotkey.bind(ctrl_opt, "f8", function()
+hs.hotkey.bind(ctrl_opt, "F8", function()
   notifyDefaultAudio()
 end)
-hs.hotkey.bind(ctrl_opt, "f9", function()
+hs.hotkey.bind(ctrl_opt, "F9", function()
   setDefaultAudioDevice(builtinIn, builtinOut)
 end)
 
-paste = require("paste")
+require("paste")
 
--- Add /usr/local/bin/hs REPL
-hs.ipc.cliInstall()
+-- Add $HOMEBREW_PREFIX/bin/hs REPL
+
+if hs.fs.attributes("/opt/homebrew", "mode") then
+  homebrew_prefix = "/opt/homebrew"
+end
+hs.ipc.cliInstall(homebrew_prefix)
+
