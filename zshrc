@@ -30,7 +30,6 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias k=kubectl
 
-export HISTCONTROL=ignoreboth
 export LESS=-FRX
 export VISUAL=vi
 export PERL_HOMEDIR=0
