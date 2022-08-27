@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-function jq() {
-  local color
+# function jq() {
+#   local color
 
-  if [[ $1 == -M ]]; then
-    color=--monochrome-output
-    shift
-  else
-    color=--color-output
-  fi
+#   if [[ $1 == -M ]]; then
+#     color=--monochrome-output
+#     shift
+#   else
+#     color=--color-output
+#   fi
 
-  /usr/local/bin/jq $color "$@"
-}
+#   /usr/local/bin/jq $color "$@"
+# }
 
 function GET() {
   if [[ $1 == -M ]]; then
@@ -41,10 +41,6 @@ function set-tab-title() {
   else
     tmux rename-window "${title}"
   fi
-}
-
-function forward-port() {
-  ssh -fN -L "$1":localhost:"$1" "$2"
 }
 
 if uname | grep -Fiq darwin; then

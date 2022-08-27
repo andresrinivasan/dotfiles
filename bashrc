@@ -48,8 +48,17 @@ if [ -f '/Users/andre/.local/google-cloud-sdk/completion.bash.inc' ]; then . '/U
 alias k=kubectl
 complete -F __start_kubectl k
 
-complete -C "$(which terraform)" terraform
-eval "$($(which gh) completion -s bash))"
+if hash terraform 2>/dev/null; then
+  complete -C "$(which terraform)" terraform
+fi
+
+if hash gh 2>/dev/null; then 
+  eval "$($(which gh) completion -s bash)"
+fi
+
+if hash poetry 2>/dev/null; then
+  eval "$($(which poetry) completions bash)"
+fi
 
 # # Neither pureline nor iTerm2 shell integration export their variables/functions; every child shell
 # # then needs this. The order is also important as iTerm shell integration preserves existing prompt
@@ -67,7 +76,11 @@ eval "$($(which gh) completion -s bash))"
 #   test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
 # fi
 
-eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/v"$(oh-my-posh --version)"/themes/powerlevel10k_modern.omp.json)"
+# export ITERM2_SQUELCH_MARK=1
+# export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
+# test -e "${HOME}/.iterm2_shell_integration.bash" && . "${HOME}/.iterm2_shell_integration.bash"
+
+eval "$(oh-my-posh init bash --config ~/.config/omp/powerlevel10k_modern.omp.json)"
 
 ## Extra stuff that shouldn't go into GitHub
 # shellcheck source=/dev/null

@@ -57,7 +57,7 @@ if [ ! -v BASH_PROFILE ]; then
       MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
     done
 
-    for p in lsof openssl curl; do
+    for p in lsof openssl curl openjdk; do
       PATH="$HOMEBREW_PREFIX"/opt/"$p"/bin:"$PATH"
       MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
     done
@@ -73,6 +73,10 @@ if [ ! -v BASH_PROFILE ]; then
   fi
 
   PATH=~/bin:~/.krew/bin:$PATH
+
+  if hash java 2>/dev/null; then
+    export JAVA_HOME=$(dirname "$(hash -t java)")
+  fi
 fi
 
 # shellcheck source=/dev/null
