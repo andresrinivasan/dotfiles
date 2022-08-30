@@ -1,3 +1,10 @@
+## Copied from https://github.com/mattmc3/antidote
+if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
+  git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+fi
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -24,6 +31,10 @@ if hash dircolors 2>/dev/null; then
   if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
 fi
 
+if hash lesspipe 2>/dev/null; then
+  lesspipe.sh|source /dev/stdin
+fi
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -35,6 +46,9 @@ export VISUAL=vi
 export PERL_HOMEDIR=0
 
 export GCP_VM_FILTER=andre          ## For list-gcp-vm
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
+source ~/.p10k.zsh                            ## For Powerlevel10k plugin loaded by antidote
 
 # shellcheck source=/dev/null
 export HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
@@ -67,8 +81,10 @@ if hash java 2>/dev/null; then
   export JAVA_HOME=$(dirname "$(which java)")
 fi
 
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.p10k.zsh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-source $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+## XXX Explore this further
+autoload -U select-word-style 
+select-word-style bash
+WORDCHARS=$WORDCHARS:s:-:   ## Delete the '-' from the list of word characters
+
