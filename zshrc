@@ -13,7 +13,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=${ZDOTDIR:-~}/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
@@ -21,14 +21,14 @@ setopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/andre/.zshrc'
+zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
 # shellcheck source=/dev/null
-export HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
+HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
 if [ "$HOMEBREW_PREFIX" ]; then
   PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
 
@@ -42,13 +42,13 @@ if [ "$HOMEBREW_PREFIX" ]; then
     MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
   done
 
-  export HOMEBREW_NO_ENV_HINTS=true
+  HOMEBREW_NO_ENV_HINTS=true
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
 # shellcheck source=/dev/null
-if [ -f '/Users/andre/.local/google-cloud-sdk/path.bash.inc' ]; then 
-  . '/Users/andre/.local/google-cloud-sdk/path.zsh.inc'
+if [ -f ~/.local/google-cloud-sdk/path.zsh.inc ]; then 
+  source ~/.local/google-cloud-sdk/path.zsh.inc
   export USE_GKE_GCLOUD_AUTH_PLUGIN=true
 fi
 
@@ -81,7 +81,7 @@ export GCP_VM_FILTER=andre                    ## For list-gcp-vm
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
 source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded by antidote
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
 ## XXX Explore this further
 autoload -U select-word-style 
