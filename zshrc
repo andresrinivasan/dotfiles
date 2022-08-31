@@ -1,4 +1,4 @@
-## Copied from https://github.com/mattmc3/antidote
+## Copied from https://github.com/mattmc3/antidote. This can be verbose so put ahead of P10k instant prompt.
 if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
   git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 fi
@@ -27,29 +27,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-if hash dircolors 2>/dev/null; then
-  if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
-fi
-
-if hash lesspipe 2>/dev/null; then
-  lesspipe.sh|source /dev/stdin
-fi
-
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias k=kubectl
-
-export LESS=-FRX
-export VISUAL=vi
-export PERL_HOMEDIR=0
-
-export GCP_VM_FILTER=andre          ## For list-gcp-vm
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
-source ~/.p10k.zsh                            ## For Powerlevel10k plugin loaded by antidote
-
 # shellcheck source=/dev/null
 export HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
 if [ "$HOMEBREW_PREFIX" ]; then
@@ -77,14 +54,36 @@ fi
 
 PATH=~/bin:~/.krew/bin:$PATH
 
-if hash java 2>/dev/null; then
-  export JAVA_HOME=$(dirname "$(which java)")
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias k=kubectl
+
+if command -v dircolors >/dev/null; then
+  if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
 fi
+
+if command -v lesspipe >/dev/null; then
+  lesspipe.sh|source /dev/stdin
+fi
+
+if command -v java >/dev/null; then
+  export JAVA_HOME=$(dirname "$(command -v java)")
+fi
+
+export LESS=-FRX
+export VISUAL=vi
+export PERL_HOMEDIR=0
+
+export GCP_VM_FILTER=andre                    ## For list-gcp-vm
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
+source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded by antidote
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ## XXX Explore this further
 autoload -U select-word-style 
 select-word-style bash
-WORDCHARS=$WORDCHARS:s:-:   ## Delete the '-' from the list of word characters
-
+WORDCHARS=$WORDCHARS:s:-:   ## Remove'-' from list of word characters
