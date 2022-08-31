@@ -1,10 +1,3 @@
-## Copied from https://github.com/mattmc3/antidote. This can be verbose so put ahead of P10k instant prompt.
-if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
-  git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
-fi
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-antidote load
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -26,6 +19,13 @@ zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+## Copied from https://github.com/mattmc3/antidote
+if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
+  git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+fi
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
 
 # shellcheck source=/dev/null
 HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
