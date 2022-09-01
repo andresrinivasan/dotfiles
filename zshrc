@@ -49,6 +49,7 @@ fi
 # shellcheck source=/dev/null
 if [ -f ~/.local/google-cloud-sdk/path.zsh.inc ]; then 
   source ~/.local/google-cloud-sdk/path.zsh.inc
+  source ~/.local/google-cloud-sdk/completion.zsh.inc
   export USE_GKE_GCLOUD_AUTH_PLUGIN=true
 fi
 
