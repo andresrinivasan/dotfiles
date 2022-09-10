@@ -80,9 +80,10 @@ export PERL_HOMEDIR=0
 export GCP_VM_FILTER=andre                    ## For list-gcp-vm
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
+
 source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded by antidote
 typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-##typeset -g POWERLEVEL9K_VIRTUALENV_GENERIC_NAMES=(virtualenv venv .venv env)
+typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
@@ -93,5 +94,6 @@ WORDCHARS=$WORDCHARS:s:-:   ## Remove'-' from list of word characters
 
 ## Added by terraform
 ## XXX Explore this further
-autoload -U +X bashcompinit && bashcompinit
+autoload -U +X bashcompinit
+bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
