@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /tmp
+brew bundle dump --file=- >brewfile-$(date +%Y%m%d)
+
