@@ -60,6 +60,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias k=kubectl
+alias cat='bat --paging=never'
+alias less=bat
 
 if command -v dircolors >/dev/null; then
   if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
@@ -79,11 +81,15 @@ export PERL_HOMEDIR=0
 
 export GCP_VM_FILTER=andre                    ## For list-gcp-vm
 
+export BAT_THEME="ansi"
+export BAT_STYLE="changes"
+
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
 
 source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded by antidote
 typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
 typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
+typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
