@@ -20,6 +20,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+## Added by terraform
+## XXX Explore this further
+autoload -U +X bashcompinit
+bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
 ## Copied from https://github.com/mattmc3/antidote
 if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
   git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
@@ -62,27 +68,33 @@ alias egrep='egrep --color=auto'
 alias k=kubectl
 alias cat='bat --paging=never'
 alias less=bat
+alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
+alias lessy="less --language=yaml"
+alias lessj="less --language=json"
+alias man=batman
 
 if command -v dircolors >/dev/null; then
   if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
-fi
-
-if command -v lesspipe >/dev/null; then
-  lesspipe.sh|source /dev/stdin
 fi
 
 if command -v java >/dev/null; then
   export JAVA_HOME=$(dirname "$(command -v java)")
 fi
 
-export LESS=-FRX
+
 export VISUAL=vi
 export PERL_HOMEDIR=0
 
 export GCP_VM_FILTER=andre                    ## For list-gcp-vm
 
-export BAT_THEME="ansi"
+export BAT_THEME="Monokai Extended"
 export BAT_STYLE="changes"
+if command -v lesspipe >/dev/null; then
+  lesspipe.sh|source /dev/stdin
+fi
+export LESS=-FRX
+
+export HOMEBREW_NO_ENV_HINTS=true
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
 
@@ -90,6 +102,9 @@ source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded
 typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
 typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
 typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+typeset -g POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
+typeset -g POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
+typeset -g POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
@@ -98,8 +113,3 @@ autoload -U select-word-style
 select-word-style bash
 WORDCHARS=$WORDCHARS:s:-:   ## Remove'-' from list of word characters
 
-## Added by terraform
-## XXX Explore this further
-autoload -U +X bashcompinit
-bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
