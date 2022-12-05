@@ -81,3 +81,5 @@ fi
 
 # shellcheck source=/dev/null
 . ~/.bashrc
+
+complete -C /opt/homebrew/bin/terraform terraform

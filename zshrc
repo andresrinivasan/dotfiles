@@ -16,6 +16,7 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
 
+fpath+=~/.zfunc
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -32,6 +33,18 @@ if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
 fi
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
+
+## Configure zsh plugins loaded by Antidote
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+source ${ZDOTDIR:-~}/.p10k.zsh
+export POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
+export POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
+export POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+export POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
+export POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
+export POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
+unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND            ## Always show kubectx
 
 # shellcheck source=/dev/null
 HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
@@ -59,22 +72,28 @@ if [ -f ~/.local/google-cloud-sdk/path.zsh.inc ]; then
   export USE_GKE_GCLOUD_AUTH_PLUGIN=true
 fi
 
-PATH=~/bin:~/.krew/bin:$PATH
+PATH=~/bin:~/.local/bin:~/.krew/bin:$PATH
+typeset -U PATH path    ## Only keep first occurance
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias k=kubectl
+alias k=kubectl && compdef k='kubectl'
 alias cat='bat --paging=never'
 alias less=bat
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
 alias lessy="less --language=yaml"
 alias lessj="less --language=json"
-alias man=batman
+alias man=batman && compdef batman='man'
 
 if command -v dircolors >/dev/null; then
-  if [ -r ~/.dircolors ]; then eval "$(dircolors -b ~/.dircolors)"; else eval "$(dircolors -b)"; fi
+  if [ -r ~/.dircolors ]; then 
+    d="~/.dircolors"
+  else
+    d=""
+  fi
+  eval "$(dircolors -b $d)"
 fi
 
 if command -v java >/dev/null; then
@@ -90,21 +109,12 @@ export GCP_VM_FILTER=andre                    ## For list-gcp-vm
 export BAT_THEME="Monokai Extended"
 export BAT_STYLE="changes"
 if command -v lesspipe >/dev/null; then
-  lesspipe.sh|source /dev/stdin
+  eval "$(lesspipe.sh)"
 fi
 export LESS=-FRX
 
 export HOMEBREW_NO_ENV_HINTS=true
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)    ## For zsh-syntax-highlighting plugin loaded by antidote
-
-source ${ZDOTDIR:-~}/.p10k.zsh                ## For Powerlevel10k plugin loaded by antidote
-typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-typeset -g POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
-typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-typeset -g POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
-typeset -g POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
-typeset -g POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 

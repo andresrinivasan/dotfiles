@@ -3,7 +3,7 @@ hs.logger.defaultLogLevel = "info"
 hyper       = {"cmd","alt","ctrl"}
 shift_hyper = {"cmd","alt","ctrl","shift"}
 ctrl_cmd    = {"cmd","ctrl"}
-ctrl_opt    = {"ctrl", "alt"}
+ctrl_opt    = {"ctrl","alt"}
 
 hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
