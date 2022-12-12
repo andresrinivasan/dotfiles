@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ "$#" -gt 0 ]; then
+  sleep "$1"
+fi
+
+renice 20 $(pgrep crowdstrike)
+
+pmset -b displaysleep 10
+pmset -c displaysleep 30
+
+/Users/andre/bin/reset-pam-tid
+
+touch /tmp/set-my-overrides-$(date +"%Y%m%d-%H%M%S")
+
