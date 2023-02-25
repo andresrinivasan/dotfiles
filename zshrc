@@ -87,21 +87,21 @@ alias lessy="less --language=yaml"
 alias lessj="less --language=json"
 alias man=batman && compdef batman='man'
 
+## Assumes Solarized Dark for terminal
 if command -v dircolors >/dev/null; then
   if [ -r ~/.dircolors ]; then 
-    d="~/.dircolors"
-  else
-    d=""
+    eval "$(dircolors -b ~/.dircolors)"
+  elif [ -r ~/repos/dircolors-solarized ]; then
+    eval $(dircolors ~/repos/dircolors-solarized/dircolors.ansi-dark)
   fi
-  eval "$(dircolors -b $d)"
 fi
 
 if command -v java >/dev/null; then
   export JAVA_HOME=$(dirname "$(command -v java)")
 fi
 
-
 export VISUAL=vi
+
 export PERL_HOMEDIR=0
 
 export GCP_VM_FILTER=andre                    ## For list-gcp-vm
@@ -115,6 +115,9 @@ export LESS=-FRX
 
 export HOMEBREW_NO_ENV_HINTS=true
 
+export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
