@@ -4,12 +4,15 @@ hyper       = {"cmd","alt","ctrl"}
 shift_hyper = {"cmd","alt","ctrl","shift"}
 ctrl_cmd    = {"cmd","ctrl"}
 ctrl_opt    = {"ctrl","alt"}
+shift_ctrl_opt = {"ctrl", "alt", "shift"}
 
 hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
 Install = spoon.SpoonInstall
 
-Install:andUse("Caffeine", {start = true})
+Install:andUse("Caffeine")
+spoon.Caffeine:bindHotkeys({toggle = {shift_ctrl_opt, "w"}})
+spoon.Caffeine:start()
 
 Install:andUse("MiroWindowsManager")
 hs.window.animationDuration = 0.3
@@ -42,10 +45,33 @@ spoon.MiroWindowsManager:bindHotkeys({
 
 require("no-itunes")
 
-require("audio")
+-- require("audio")
 -- link370 = addPreferredAudio("Jabra Link", "Jabra Link 370", "Jabra Link 370")
 -- builtIn = addPreferredAudio(BUILTIN_AUDIO)
 -- setAlwaysUseWiredHeadset()
+
+device = hs.audiodevice.findDeviceByName("MacBook Air Speakers")
+print(device)
+print(device:name())
+print(device:balance())
+
+-- -- From audio
+-- -- Inspired by https://www.tunabellysoftware.com/balance_lock/
+-- local function resetBalance(uid, event, scope, element)
+--   print(string.format("resetBalance: event=%s, scope=%s, element=%d", event, scope, element))
+--   if event == "span" or event == "vmvc" then    -- XXX span is returned for builtin. For BT I get vmvc.
+--     device = hs.audiodevice.findDeviceByUID(uid)
+--     print(string.format("resetBalance: device:name=%s device:balance=%f", device:name(), 0))
+--     if device:balance() ~= 0.5 then
+--       device:setBalance(0.5)
+--     end
+--   end
+-- end
+
+-- for i,d in ipairs(hs.audiodevice.allOutputDevices()) do
+--   d:watcherCallback(resetBalance)
+--   d:watcherStart()
+-- end
 
 hs.hotkey.bind(ctrl_opt, "F7", function()
   setDefaultAudioDevice(link370In, link370Out)
