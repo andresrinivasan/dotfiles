@@ -1,9 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/.histfile
@@ -13,19 +13,9 @@ setopt autocd
 setopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+
+# Added by compinstall
 zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
-
-fpath+=~/.zfunc
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-## Added by terraform
-## XXX Explore this further
-autoload -U +X bashcompinit
-bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 ## Copied from https://github.com/mattmc3/antidote
 if ! [[ -e ${ZDOTDIR:-~}/.antidote ]]; then
@@ -34,26 +24,37 @@ fi
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
+fpath+=~/.zfunc
+# autoload -Uz compinit
+# compinit
+
+## Added by terraform
+## XXX Explore this further
+autoload -U +X bashcompinit
+bashcompinit
+
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
 ## Configure zsh plugins loaded by Antidote
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-source ${ZDOTDIR:-~}/.p10k.zsh
-export POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-export POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
-export POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-export POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
-export POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
-export POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
-unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND            ## Always show kubectx
+# source ${ZDOTDIR:-~}/.p10k.zsh
+# export POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
+# export POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
+# export POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+# export POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
+# export POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
+# export POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
+# unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND            ## Always show kubectx
 
 # shellcheck source=/dev/null
 HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
 if [ "$HOMEBREW_PREFIX" ]; then
   PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
 
-  for p in coreutils gnu-tar; do
+  for p in coreutils gnu-tar grep; do
     PATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/gnubin:"$PATH"
-    MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
+    MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/man:"$MANPATH"
   done
 
   for p in lsof openssl curl openjdk; do
@@ -77,8 +78,8 @@ typeset -U PATH path    ## Only keep first occurance
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias fgrep='grep -F --color=auto'
+alias egrep='grep -E --color=auto'
 alias k=kubectl && compdef k='kubectl'
 alias cat='bat --paging=never'
 alias less=bat
@@ -119,10 +120,14 @@ export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
-test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
-
 ## XXX Explore this further
 autoload -U select-word-style 
 select-word-style bash
 WORDCHARS=$WORDCHARS:s:-:   ## Remove'-' from list of word characters
 
+# Generated for envman. Do not edit. Added by pipx
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
+
+eval "$(starship init zsh)"

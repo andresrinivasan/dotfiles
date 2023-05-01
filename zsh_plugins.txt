@@ -1,3 +1,9 @@
-romkatv/powerlevel10k
+##romkatv/powerlevel10k
+
+##Azure/azure-cli path:az.completion kind:clone
+
 zsh-users/zsh-syntax-highlighting
-Azure/azure-cli path:az.completion kind:clone
+zsh-users/zsh-completions
+
+## Must come after all other completion plugins
+belak/zsh-utils path:completion
