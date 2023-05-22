@@ -57,7 +57,7 @@ if [ "$HOMEBREW_PREFIX" ]; then
     MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/man:"$MANPATH"
   done
 
-  for p in lsof openssl curl openjdk; do
+  for p in lsof openssl curl openjdk binutils; do
     PATH="$HOMEBREW_PREFIX"/opt/"$p"/bin:"$PATH"
     MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/share/man:"$MANPATH"
   done
