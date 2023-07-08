@@ -24,7 +24,7 @@ fi
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-fpath+=~/.zfunc
+fpath=(~/.zfunc $fpath)
 # autoload -Uz compinit
 # compinit
 
