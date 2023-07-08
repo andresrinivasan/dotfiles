@@ -28,12 +28,13 @@ fpath=(~/.zfunc $fpath)
 # autoload -Uz compinit
 # compinit
 
-## Added by terraform
-## XXX Explore this further
 autoload -U +X bashcompinit
 bashcompinit
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+## pipx completions
+eval "$(register-python-argcomplete pipx)"
 
 ## Configure zsh plugins loaded by Antidote
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -128,6 +129,7 @@ WORDCHARS=$WORDCHARS:s:-:   ## Remove'-' from list of word characters
 
 # Generated for envman. Do not edit. Added by pipx
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
 
 test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
