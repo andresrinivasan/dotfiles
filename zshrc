@@ -112,6 +112,7 @@ export BAT_STYLE="changes"
 if command -v lesspipe >/dev/null; then
   eval "$(lesspipe.sh)"
 fi
+
 export LESS=-FRX
 
 export HOMEBREW_NO_ENV_HINTS=true
