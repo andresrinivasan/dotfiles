@@ -1,0 +1,172 @@
+{
+  "main": {
+    "id": "11144737dff78ebb",
+    "type": "split",
+    "children": [
+      {
+        "id": "eccdbc584d1881a2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3a586da4f61a5f58",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "!Inbox/Note Taking System For Success in Academia.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0b6ed6ebd2d6c6d4",
+    "type": "split",
+    "children": [
+      {
+        "id": "4278e87612e4bae2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ab3608b353ff580f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTime"
+              }
+            }
+          },
+          {
+            "id": "a80be8f127c4b0f0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "819aad026879ce6c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "a1a8ba957cf10cee",
+    "type": "split",
+    "children": [
+      {
+        "id": "62a0b6f7e2443c19",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0001d871545ac941",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "!Inbox/Note Taking System For Success in Academia.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4649cee72b34d919",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "!Inbox/Note Taking System For Success in Academia.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "742331b9aff3a3c5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e97c9138703956b7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "!Inbox/Note Taking System For Success in Academia.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "ab3608b353ff580f",
+  "lastOpenFiles": [
+    "!Inbox/Battle Card Background.md",
+    "!Inbox/Note Taking System For Success in Academia.md",
+    "!Inbox/Note Taking System For Success in Academia.md",
+    "00MarkDownload/Unconfirmed 347066.crdownload",
+    "00MarkDownload/Unconfirmed 370051.crdownload",
+    "00MarkDownload",
+    "MarkDownload.md",
+    "MarkDownload 1.md",
+    "!Inbox/Untitled.md",
+    "MarkDownload",
+    "!Inbox/Edge Connect Battle Card.md",
+    "!Inbox/zzattachments/TD SYNNEX RunAI Battle Card 2023.pdf",
+    "!Inbox/zzattachments/2023 Cloudera Battle Card.pdf",
+    "!Inbox/zzattachments/Pasted image 20230717225420.png",
+    "!Inbox/zzattachments",
+    "!Inbox",
+    "!Inbox/zzattachments/Pasted image 20230717230232.png",
+    "Untitled.md",
+    "!Inbox/zzattachments/Pasted image 20230717225507.png",
+    "Pasted image 20230717222430.png"
+  ]
+}

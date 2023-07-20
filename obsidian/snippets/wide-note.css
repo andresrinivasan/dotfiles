@@ -1,0 +1,9 @@
+/*
+ * From https://gist.github.com/vii33/f2c3a85b64023cefa9df6420730c7531
+ * 
+ * Make notes closer to the width of the page area. 
+ */
+
+body {
+    --file-line-width: 50rem;
+}
