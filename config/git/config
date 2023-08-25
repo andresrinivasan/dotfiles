@@ -3,8 +3,7 @@
 	useConfigOnly = true
 	##signingkey = 23CFFEC9C545E50E
 [core]
-	excludesfile =~/.gitignore_global
-	hooksPath = ~/.git-hooks
+	hooksPath = ~/.config/git/hooks
 	editor = vi
 	pager = less -R
 	autocrlf = input
