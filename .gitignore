@@ -1,4 +1,1 @@
 .DS_Store
-bin/orb
-bin/orbctl
-bin/docker-credential-osxkeychain
