@@ -28,8 +28,6 @@
 # Enforce SSH, most of the time
 
 ## For Homebrew, I want to use HTTPS so I can automate updates and still use an SSH key agent for everything else. 
-## I could figure out how to use the shorter version this pattern elsewhere and ended up testing via git remote -v
-## until I was convinced I was always going map to HTTPS.
 [url "https://github.com/Homebrew"]
   insteadOf = git@github.com:Homebrew
   insteadOf = https://github.com/Homebrew
