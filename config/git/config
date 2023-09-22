@@ -25,23 +25,25 @@
 [rebase]
 	autoStash = true
 
-# Enforce SSH, most of the time
+# Enforce SSH, for my repos. Homebrew also uses GitHub but I want that to use HTTPS so that an SSH key isn't
+# required from the ssh-agent.
+[includeIf "gitdir:~/repos/"]
+  path=config-use-ssh
 
-## For Homebrew, I want to use HTTPS so I can automate updates and still use an SSH key agent for everything else.
-## Both lines are needed as the rewrite rules seem to execute on the re-written URL. Without the second line the rules
-## would fall through and SSH would get used. Note from the git config docs, longest match wins. Additional rules are
-## needed for each tap that is not part of the Homebrew repo.
-[url "https://github.com/Homebrew"]
-  insteadOf = git@github.com:Homebrew
-  insteadOf = https://github.com/Homebrew
-[url "https://github.com/eth-p/homebrew-software"]
-  insteadOf = git@github.com:eth-p/homebrew-software
-  insteadOf = https://github.com/eth-p/homebrew-software
+# [url "https://github.com/Homebrew"]
+#   insteadOf = git@github.com:Homebrew
+#   insteadOf = https://github.com/Homebrew
+# [url "https://github.com/eth-p/homebrew-software"]
+#   insteadOf = git@github.com:eth-p/homebrew-software
+#   insteadOf = https://github.com/eth-p/homebrew-software
+# [url "https://github.com/brunoluiz/homebrew-tap"]
+#   insteadOf = git@github.com:brunoluiz/homebrew-tap
+#   insteadOf = https://github.com/brunoluiz/homebrew-tap
 
-[url "git@github.com:"]
-  insteadOf = https://github.com/
-[url "git@gitlab.com:"]
-  insteadOf = https://gitlab.com/
-[url "git@bitbucket.org:"]
-  insteadOf = https://bitbucket.org
+# [url "git@github.com:"]
+#   insteadOf = https://github.com/
+# [url "git@gitlab.com:"]
+#   insteadOf = https://gitlab.com/
+# [url "git@bitbucket.org:"]
+#   insteadOf = https://bitbucket.org
 
