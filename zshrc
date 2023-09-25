@@ -80,8 +80,10 @@ typeset -U PATH path ## Only keep first occurance
 
 if command -v exa >/dev/null; then
   alias ls='exa --color=auto --classify'
+  alias lltr='ll -snew'
 else
   alias ls='ls --color=auto'
+  alias lltr='ll -tr'
   ## Assumes Solarized Dark for terminal
   if command -v dircolors >/dev/null; then
     if [ -r ~/.dircolors ]; then
@@ -92,7 +94,7 @@ else
   fi
 fi
 alias la='ls -a'
-alias ll='ls -lah'
+alias ll='ls -l'
 
 if command -v bat >/dev/null; then
   alias cat='bat --paging=never'
