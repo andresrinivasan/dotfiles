@@ -24,6 +24,10 @@ spoon.MiroWindowsManager:bindHotkeys({
   fullscreen = {ctrl_opt, "return"}
 })
 
+hs.hotkey.bind(ctrl_opt, "z", function()
+  hs.window("Zoom Meeting"):focus():raise()
+end)
+
 -- Install:andUse("Seal",
 --   {
 --     hotkeys = {
@@ -84,6 +88,7 @@ hs.hotkey.bind(ctrl_opt, "F9", function()
 end)
 
 require("paste")
+require("on-sleep")
 
 -- Add $HOMEBREW_PREFIX/bin/hs REPL
 
