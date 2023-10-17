@@ -1,0 +1,9 @@
+/*
+ * From https://www.reddit.com/r/ObsidianMD/comments/qyl4jd/comment/hllu3v8/
+ * 
+ * Assuming attachments are stord in zzattchments in each folder, hide the folder
+ */
+
+.nav-folder.mod-root>.nav-folder-children .nav-folder>.nav-folder-title[data-path*="/zzattachments"],
+.nav-folder.mod-root>.nav-folder-children .nav-folder>.nav-folder-title[data-path*="/zzattachments"] + .nav-folder-children {
+display: none;}

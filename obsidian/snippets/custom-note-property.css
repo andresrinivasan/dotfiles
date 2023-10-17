@@ -1,0 +1,31 @@
+/* hides "Properties" title, also hides dropdown */
+.metadata-properties-heading {
+  display: none;
+}
+
+.metadata-properties, .metadata-properties *, .metadata-add-button, .metadata-properties-heading {
+  font-family: var(--font-monospace), "azeret mono", "space mono", "jetbrains mono";
+}
+
+body {
+  --metadata-label-font-weight: 500;
+  --metadata-label-text-color: #bdc;
+  --metadata-label-font-size: 14px;
+  --metadata-input-font-size: 14px;
+  --metadata-gap: 0;
+  --metadata-padding: 0 0 .25rem 0;
+  --metadata-label-width: max(22.5%, 8rem);
+  --metadata-input-height: calc(var(--metadata-label-font-size) * 2.1);
+}
+
+.metadata-property-key .metadata-property-icon {
+  --icon-color: #bdc;
+  --icon-size: 1rem;
+}
+
+.metadata-container {
+  border-top: dashed .2rem var(--background-modifier-border);
+  margin-top: 1.5rem;
+  /* for minimal theme */
+  --input-height: var(--metadata-input-height);
+}
