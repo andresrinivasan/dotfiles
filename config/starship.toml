@@ -3,36 +3,23 @@ format = """\
 [󰀵 ](bg:#7DF9AA fg:#090c0c)\
 [](fg:#7DF9AA bg:#3B76F0)\
 $directory\
-[](fg:#3B76F0 bg:#ada805)\
 $git_branch\
 $git_status\
-$git_metrics\
-[](fg:#ada805 bg:#00030B16)\
 $character\
 """
 
 [directory]
-format = "[ $path ]($style)"
+format = "[ $path ]($style)[](fg:#3B76F0 bg:#00ADA805)"
 style = "fg:#E4E4E4 bg:#3B76F0"
 
 [git_branch]
-format = '[ $symbol$branch(:$remote_branch) ]($style)'
-symbol = "  "
-style = "fg:#1C3A5E bg:#ada805"
+format = '[$symbol$branch(:$remote_branch) ]($style)'
+symbol = "  "
+style = "fg:#1C3A5E bg:#ADA805"
 
 [git_status]
-format = '[$all_status]($style)'
-style = "fg:#1C3A5E bg:#ada805"
-
-[git_metrics]
-format = "([+$added]($added_style))[]($added_style)"
-added_style = "fg:#1C3A5E bg:#ada805"
-deleted_style = "fg:bright-red bg:235"
-disabled = false
-
-[hg_branch]
-format = "[ $symbol$branch ]($style)"
-symbol = " "
+format = '[$all_status]($style)[](fg:#ADA805 bg:#00030B16)'
+style = "fg:#1C3A5E bg:#ADA805"
 
 [character]
 success_symbol = '[](#000000)'
