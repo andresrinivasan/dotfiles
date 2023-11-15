@@ -97,3 +97,6 @@ if hs.fs.attributes("/opt/homebrew", "mode") then
 end
 hs.ipc.cliInstall(homebrew_prefix)
 
+require("ssb")
+require("on-wake")
+
