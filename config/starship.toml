@@ -1,27 +1,35 @@
 format = """\
-[](bg:#00030B16 fg:#7DF9AA)\
-[󰀵 ](bg:#7DF9AA fg:#090c0c)\
-[](fg:#7DF9AA bg:#3B76F0)\
+$os\
+${custom.host}\
 $directory\
 $git_branch\
 $git_status\
-$character\
+$line_break\
+$character
 """
 
 [directory]
-format = "[ $path ]($style)[](fg:#3B76F0 bg:#00ADA805)"
+format = "[](#3B76F0)[$path]($style)[](#3B76F0)"        ## [](fg:#3B76F0 bg:#00ADA805)
 style = "fg:#E4E4E4 bg:#3B76F0"
 
 [git_branch]
-format = '[$symbol$branch(:$remote_branch) ]($style)'
+format = '[](#ADA805)[$symbol$branch(:$remote_branch) ]($style)'
 symbol = "  "
 style = "fg:#1C3A5E bg:#ADA805"
 
 [git_status]
-format = '[$all_status]($style)[](fg:#ADA805 bg:#00030B16)'
+format = '[$all_status]($style)[](fg:#ADA805 bg:#00030B16)'
 style = "fg:#1C3A5E bg:#ADA805"
 
 [character]
-success_symbol = '[](#000000)'
-error_symbol = '[✗](#E84D44)'
+format = '[\$ ](bold green)'
+
+[custom.host]
+disabled = true
+when = true
+format = '[](bg:#00030B16 fg:#7DF9AA)[󰀵 ](bg:#7DF9AA fg:#090c0c)[](fg:#7DF9AA bg:#3B76F0)'
+
+[os]
+##style = 'bg:#7DF9AA fg:#090c0c'
+disabled = false
 
