@@ -1,20 +1,25 @@
+## Started from https://dev.to/therubberduckiee/how-to-configure-starship-to-look-exactly-like-p10k-zsh-warp-h9h
+
 format = """\
 $os\
 ${custom.host}\
 $directory\
 $git_branch\
-$git_status\
+${custom.git_status}\
+$fill\
+$python\
+$docker_context\
 $line_break\
-$character
+$character\
 """
 
 [directory]
-format = "[](#3B76F0)[$path]($style)[](#3B76F0)"        ## [](fg:#3B76F0 bg:#00ADA805)
+format = "[](#3B76F0)[$path]($style)[](#3B76F0)"
 style = "fg:#E4E4E4 bg:#3B76F0"
 
 [git_branch]
 format = '[](#ADA805)[$symbol$branch(:$remote_branch) ]($style)'
-symbol = "  "
+symbol = "  "
 style = "fg:#1C3A5E bg:#ADA805"
 
 [git_status]
@@ -22,7 +27,13 @@ format = '[$all_status]($style)[](fg:#ADA805 bg:#00030B16)'
 style = "fg:#1C3A5E bg:#ADA805"
 
 [character]
-format = '[\$ ](bold green)'
+
+[python]
+format ="[${symbol}(${pyenv_prefix})($virtualenv) (${version} )]($style)"
+style = "fg:#1C3A5E"
+
+[docker_context]
+format = '[$symbol]($style)'
 
 [custom.host]
 disabled = true
@@ -32,4 +43,33 @@ format = '[](bg:#00030B16 fg:#7DF9AA)[󰀵 ](bg:#7DF9AA fg:#090c0c)[](fg:#
 [os]
 ##style = 'bg:#7DF9AA fg:#090c0c'
 disabled = false
+
+[fill]
+symbol = ' '
+
+## From https://github.com/starship/starship/discussions/1252#discussioncomment-7281234
+[custom.git_status]
+command = '''
+git_status=$(git status --porcelain)
+# Untracked or Deleted (unstaged) files - Red
+if echo ${git_status} | grep -qe '^?? ' -e '^[MARCDU ]D ' -e '^D[ UM]'; then
+    ##echo -n $'\e[31m●'
+    echo -n '🔴 '
+fi
+
+# Modified (unstaged) and Renamed files - Yellow
+if echo ${git_status} | grep -qe '^[ MARC]M ' -e '^R[ MD] '; then
+    ##echo -n $'\e[33m●'
+    echo -n '🟡 '
+fi
+
+# Staged files (including Deleted) - Green
+if echo ${git_status} | grep -qe '^A[ MDAU] ' -e '^M[ MD] ' -e '^UA' -e '^D '; then
+    ##echo -n $'\e[32m●'
+    echo -n 🟢
+fi
+'''
+when = 'git rev-parse --is-inside-work-tree >/dev/null 2>&1'
+format = '[($output)](fg:#1C3A5E bg:#ADA805)[](fg:#ADA805 bg:#00030B16)'
+
 
