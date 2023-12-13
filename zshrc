@@ -56,7 +56,7 @@ if [ "$HOMEBREW_PREFIX" ]; then
 
   for p in coreutils gnu-tar grep; do
     PATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/gnubin:"$PATH"
-    MANPATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/man:"$MANPATH"
+    MANPATH=$(readlink -f "$HOMEBREW_PREFIX"/opt/"$p"/libexec/man):"$MANPATH"
   done
 
   for p in lsof openssl curl openjdk binutils; do
@@ -98,17 +98,39 @@ alias ll='ls -l'
 
 if command -v bat >/dev/null; then
   alias cat='bat --paging=never'
-  alias less=bat
-  alias lessy="less --language=yaml"
-  alias lessj="less --language=json"
+  alias lessy="bat --language=yaml"
+  alias lessj="bat --language=json"
   alias man=batman && compdef batman='man'
+
+  export BAT_THEME="Monokai Extended"
+  export BAT_STYLE="plain"
 fi
+
+## Stick with less/lesspipe as batpipe doesn't support PDF out of the box
+if command -v lesspipe.sh >/dev/null; then
+  eval "$(lesspipe.sh)"
+fi
+
+# if command -v batpipe >/dev/null; then
+#   eval "$(batpipe)"
+# fi
 
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
 alias k=kubectl && compdef k='kubectl'
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
+
+## From https://www.freecodecamp.org/news/how-to-get-a-docker-container-ip-address-explained-with-examples/
+## Also can't pass an argument to an alias so use an anonymous function
+alias dnlsip="(){
+  if [ $# -eq 0 ]; then
+    echo Usage: dnlsip DOCKER-NETWORK. One of
+    docker network ls --format '\t{{.Name}}'    
+    return 1
+  fi
+  docker network inspect -f '{{json .Containers}}' \$1 | jq '.[] | .Name + \": \" + .IPv4Address'
+}"
 
 if command -v java >/dev/null; then
   export JAVA_HOME=$(dirname "$(command -v java)")
@@ -120,14 +142,7 @@ export GCP_VM_FILTER=andre ## For list-gcp-vm
 export HOMEBREW_NO_ENV_HINTS=true
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 export POETRY_VIRTUALENVS_IN_PROJECT=true
-
-export BAT_THEME="Monokai Extended"
-export BAT_STYLE="changes"
-
 export LESS=-FRX
-if command -v lesspipe >/dev/null; then
-  eval "$(lesspipe.sh)"
-fi
 
 ## XXX Explore this further
 autoload -U select-word-style
