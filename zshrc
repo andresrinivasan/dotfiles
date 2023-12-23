@@ -132,6 +132,10 @@ alias dnlsip="(){
   docker network inspect -f '{{json .Containers}}' \$1 | jq '.[] | .Name + \": \" + .IPv4Address'
 }"
 
+alias newest="(){
+  \ls -tr \$1 | tail -1
+}"
+
 if command -v java >/dev/null; then
   export JAVA_HOME=$(dirname "$(command -v java)")
 fi
