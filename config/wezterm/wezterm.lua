@@ -1,19 +1,28 @@
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
--- This table will hold the configuration.
 local config = {}
-
--- In newer versions of wezterm, use the config_builder which will
--- help provide clearer error messages
 if wezterm.config_builder then
-  config = wezterm.config_builder()
+    config = wezterm.config_builder()
 end
 
--- This is where you actually apply your config choices
+local function setDefaults()
+    config.color_scheme = 'Hivacruz'
 
--- For example, changing the color scheme:
-config.color_scheme = 'AdventureTime'
+    -- FiraCode Retina per `wezterm ls-fonts --list-system`
+    config.font = wezterm.font({
+        family = 'FiraCode Nerd Font Mono',
+        weight = 450,
+        stretch = "Normal",
+        style = "Normal"
+    })
+    
+    config.hide_tab_bar_if_only_one_tab = true
+end
 
--- and finally, return the configuration to wezterm
+setDefaults()
+
+local inactive_window = require('inactive_window')
+inactive_window:apply_to_config(config)
+
 return config
