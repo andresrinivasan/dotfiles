@@ -20,7 +20,7 @@ style = "fg:black bg:#3B76F0"
 
 [git_branch]
 format = '[](#ADA805)[$symbol$branch(:$remote_branch) ]($style)'
-symbol = " \u2002"
+symbol = "  "
 style = "fg:black bg:#ADA805"
 
 [git_status]
@@ -34,7 +34,8 @@ format ="[](purple)[${symbol}(${pyenv_prefix})($virtualenv) (${version} )]($s
 style = "fg:black bg:purple"
 
 [golang]
-format = "[](cyan)[$symbol($version )]($style)[](cyan)"
+format = "[](cyan)[$symbol ($version)]($style)[](cyan)"
+symbol = "🦫"
 style = "fg:black bg:cyan"
 
 [docker_context]
