@@ -5,20 +5,11 @@ local dim_schema = require('dim_schema')
 local module = {}
 
 local function appearance_color_scheme(focused)
-    local scheme = 'dark'
-
-    -- if wezterm.gui then
-    --   local appearance = wezterm.gui.get_appearance()
-    --   if appearance:find 'Light' then
-    --     scheme = 'light'
-    --   end
-    -- end
-
     if focused then
-        return scheme .. "_focus"
+        return 'active'
     end
 
-    return scheme
+    return 'inactive'
 end
 
 local function apply_color_scheme(window)
@@ -30,24 +21,20 @@ local function apply_color_scheme(window)
 end
 
 function module:apply_to_config(config)
-    local dark_focus = wezterm.color.get_builtin_schemes()[config.color_scheme]
-    local dark = dim_schema:dim(dark_focus, function(name, color)
+    local active = wezterm.color.get_builtin_schemes()[config.color_scheme]
+    local inactive = dim_schema:dim(active, function(name, color)
         if name == 'background' then
             return color
         end
 
-        return wezterm.color.parse(color):darken(0.5)
+        return wezterm.color.parse(color):darken(0.6)
+        -- return wezterm.color.parse(color):adjust_hue_fixed_ryb(180)
+        -- return wezterm.color.parse(color):saturate(0)
     end)
 
-    local light_focus = wezterm.color.get_builtin_schemes()['Default Light (base16)']
-    local light = wezterm.color.get_builtin_schemes()['Default Light (base16)']
-    light.background = wezterm.color.parse(light.background):darken(0.2)
-
     config.color_schemes = {
-        ['dark'] = dark,
-        ['light'] = light,
-        ['dark_focus'] = dark_focus,
-        ['light_focus'] = light_focus
+        ['inactive'] = inactive,
+        ['active'] = active,
     }
     config.color_scheme = appearance_color_scheme(false)
 
