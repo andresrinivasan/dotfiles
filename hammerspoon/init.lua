@@ -47,7 +47,7 @@ end)
 --   }
 -- )
 
-require("no-itunes")
+noitunes = require("no-itunes")
 
 -- require("audio")
 -- link370 = addPreferredAudio("Jabra Link", "Jabra Link 370", "Jabra Link 370")
@@ -55,9 +55,9 @@ require("no-itunes")
 -- setAlwaysUseWiredHeadset()
 
 device = hs.audiodevice.findDeviceByName("MacBook Air Speakers")
-print(device)
-print(device:name())
-print(device:balance())
+-- print(device)
+-- print(device:name())
+-- print(device:balance())
 
 -- -- From audio
 -- -- Inspired by https://www.tunabellysoftware.com/balance_lock/
@@ -87,8 +87,11 @@ hs.hotkey.bind(ctrl_opt, "F9", function()
   setDefaultAudioDevice(builtinIn, builtinOut)
 end)
 
-require("paste")
-require("on-sleep")
+paste = require("paste")
+onsleep = require("on-sleep")
+onwake = require("on-wake")
+ssb = require("ssb")
+
 
 -- Add $HOMEBREW_PREFIX/bin/hs REPL
 
@@ -97,6 +100,5 @@ if hs.fs.attributes("/opt/homebrew", "mode") then
 end
 hs.ipc.cliInstall(homebrew_prefix)
 
-require("ssb")
-require("on-wake")
+
 
