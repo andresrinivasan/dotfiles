@@ -1,3 +1,5 @@
+local module = {}
+
 local function appEvent(name, event, app)
   if name == "Music" and event == hs.application.watcher.launching then
     app:hide()
@@ -6,6 +8,7 @@ local function appEvent(name, event, app)
   end
 end
 
-appWatch = hs.application.watcher.new(appEvent)
-appWatch:start()
+module.appWatch = hs.application.watcher.new(appEvent)
+module.appWatch:start()
 
+return module
