@@ -133,7 +133,7 @@ alias dnlsip="(){
   docker network inspect --format='{{range .Containers}}{{println .Name .IPv4Address}}{{end}}' \$1 | column -t -s ' '
 }"
 
-alias dcl='docker ps --format "{{println .Names .Ports}}" | column -t -s " "'
+alias dcls='docker ps --format "{{println .Names .Ports}}" | column -t -s " "'
 
 alias newest="(){
   \ls -tr \$1 | tail -1
