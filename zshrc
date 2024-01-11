@@ -122,14 +122,15 @@ alias k=kubectl && compdef k='kubectl'
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
 
 ## From https://www.freecodecamp.org/news/how-to-get-a-docker-container-ip-address-explained-with-examples/
+## See also https://stackoverflow.com/questions/65648918/docker-inspect-format-its-output-as-a-table (`docker inspect` is JSON centric; no tables)
 ## Also can't pass an argument to an alias so use an anonymous function
 alias dnlsip="(){
-  if [ $# -eq 0 ]; then
+  if [ \$# -eq 0 ]; then
     echo Usage: dnlsip DOCKER-NETWORK. One of
     docker network ls --format '\t{{.Name}}'    
     return 1
   fi
-  docker network inspect -f '{{json .Containers}}' \$1 | jq '.[] | .Name + \": \" + .IPv4Address'
+  docker network inspect --format='{{range .Containers}}{{println .Name .IPv4Address}}{{end}}' \$1 | column -t -s ' '
 }"
 
 alias newest="(){
