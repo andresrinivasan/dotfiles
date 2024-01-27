@@ -98,8 +98,9 @@ alias ll='ls -l'
 
 if command -v bat >/dev/null; then
   alias cat='bat --paging=never'
-  alias lessy="bat --language=yaml"
-  alias lessj="bat --language=json"
+  alias lessy="prettybat --language=yaml"
+  alias lessj="prettybat --language=json"
+  alias lessm="prettybat --language=markdown"
   alias man=batman && compdef batman='man'
 
   export BAT_THEME="Monokai Extended"
@@ -119,6 +120,9 @@ alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
 alias k=kubectl && compdef k='kubectl'
+alias d=docker && compdef d='docker'
+alias dc='docker compose' && compdef dc='docker'
+
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
 
 ## From https://www.freecodecamp.org/news/how-to-get-a-docker-container-ip-address-explained-with-examples/
@@ -133,7 +137,32 @@ alias dnlsip="(){
   docker network inspect --format='{{range .Containers}}{{println .Name .IPv4Address}}{{end}}' \$1 | column -t -s ' '
 }"
 
-alias dcls='docker ps --format "{{println .Names .Ports}}" | column -t -s " "'
+##alias dcls='docker ps --format "{{println .Names .Ports}}" | column -t -s " "'
+
+## From https://github.com/GammaGames/dz/blob/main/dz
+function dls() {
+    _print_container_info() {
+        local container_ports
+        local container_ip
+        local container_name
+
+        container_ports=$(docker port "${1}" | perl -n -e'/0.0.0.0:(\d+)/ && print "$1 "' | xargs | tr ' ' ',')
+        container_name=$(docker inspect --format "{{ .Name }}" "${1}" | sed 's/\///' | xargs)
+        container_ip=$(docker inspect --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}  {{end}}" "${1}" | xargs)
+
+        printf "%-13s %-20s %-20s\n" "${1}" "${container_name}" "${container_ip}":"${container_ports}"
+    }
+
+    printf "%b%-13s %-20s %-20s%b\n" $(tput bold) 'Container Id' 'Container Name' 'Container End Point' $(tput sgr0)
+    if [ -z "${1}" ]; then
+        local container_id
+        docker ps -q | while read -r container_id ; do
+            _print_container_info  "${container_id}"
+        done
+    else
+        _print_container_info  "${1}"
+    fi
+}
 
 alias newest="(){
   \ls -tr \$1 | tail -1
@@ -148,8 +177,10 @@ export PERL_HOMEDIR=0
 export GCP_VM_FILTER=andre ## For list-gcp-vm
 export HOMEBREW_NO_ENV_HINTS=true
 export SSH_AUTH_SOCK=~/.1password/agent.sock
-export POETRY_VIRTUALENVS_IN_PROJECT=true
+## export POETRY_VIRTUALENVS_IN_PROJECT=true - Switched to venv
 export LESS=-FRX
+export PIP_DISABLE_PIP_VERSION_CHECK=1
+
 
 ## XXX Explore this further
 autoload -U select-word-style
