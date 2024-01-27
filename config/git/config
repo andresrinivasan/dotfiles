@@ -30,3 +30,7 @@
 
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[checkout]
+	defaultRemote = origin
+[push]
+	defaultRemote = origin
