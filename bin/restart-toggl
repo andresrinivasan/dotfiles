@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pgrep -q Toggl && [ "$(lsof -t -p $(pgrep Toggl) -a -i | wc -l)" = 0 ] && pkill Toggl && open -a "Toggl Track"

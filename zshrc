@@ -116,6 +116,8 @@ fi
 #   eval "$(batpipe)"
 # fi
 
+
+
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
@@ -153,20 +155,29 @@ function dls() {
         printf "%-13s %-20s %-20s\n" "${1}" "${container_name}" "${container_ip}":"${container_ports}"
     }
 
-    printf "%b%-13s %-20s %-20s%b\n" $(tput bold) 'Container Id' 'Container Name' 'Container End Point' $(tput sgr0)
+    printf "%b%-13s %-20s %-20s%b\n" $(tput bold) 'Container Id' 'Container Name' 'Service End Point' $(tput sgr0)
     if [ -z "${1}" ]; then
-        local container_id
-        docker ps -q | while read -r container_id ; do
-            _print_container_info  "${container_id}"
+        local id
+        for id in $(docker ps -q); do
+            _print_container_info "${id}"
         done
     else
-        _print_container_info  "${1}"
+        _print_container_info $(docker ps -q --filter "name=${1}")
     fi
 }
 
 alias newest="(){
   \ls -tr \$1 | tail -1
 }"
+
+# alias wget="(){
+#   if [ \$# -eq 0 ]; then
+#     echo Usage: wget FILE-URL
+#     return 1
+#   fi
+
+#   http -q -d \$1
+# }"
 
 if command -v java >/dev/null; then
   export JAVA_HOME=$(dirname "$(command -v java)")

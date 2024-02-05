@@ -28,13 +28,11 @@ function module:apply_to_config(config)
         end
 
         return wezterm.color.parse(color):darken(0.6)
-        -- return wezterm.color.parse(color):adjust_hue_fixed_ryb(180)
-        -- return wezterm.color.parse(color):saturate(0)
     end)
 
     config.color_schemes = {
         ['inactive'] = inactive,
-        ['active'] = active,
+        ['active'] = active
     }
     config.color_scheme = appearance_color_scheme(false)
 

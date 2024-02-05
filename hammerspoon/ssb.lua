@@ -1,11 +1,4 @@
--- From https://github.com/zzamboni/dot-hammerspoon/blob/master/init.lua
-
--- Returns the bundle ID of an application, given its path.
-function appID(app)
-    if hs.application.infoForBundlePath(app) then
-      return hs.application.infoForBundlePath(app)['CFBundleIdentifier']
-    end
-end
+require("utils")
 
 -- Returns a function that takes a URL and opens it in the given Chrome profile
 -- Note: the value of `profile` must be the name of the profile directory under

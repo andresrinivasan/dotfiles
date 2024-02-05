@@ -3,6 +3,7 @@ local wezterm = require('wezterm')
 local module = {}
 
 local function profile_default(config)
+    config.scrollback_lines = 1000
     config.color_scheme = 'Hivacruz'
 
     -- config.font = wezterm.font({
@@ -22,7 +23,7 @@ local function profile_default(config)
         family = 'Noto Color Emoji'
     }, {
         family = 'Symbols Nerd Font Mono',
-        scale = 1.1
+        scale = 1.2
     }})
 
     config.hide_tab_bar_if_only_one_tab = true
