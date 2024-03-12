@@ -16,6 +16,7 @@ $character\
 
 [directory]
 format = "[](#3B76F0)[$path]($style)[](#3B76F0)"
+truncate_to_repo = false
 style = "fg:black bg:#3B76F0"
 
 [git_branch]
