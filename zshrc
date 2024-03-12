@@ -1,10 +1,3 @@
-# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# # Initialization code that may require console input (password prompts, [y/n]
-# # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 # Lines configured by zsh-newuser-install
 HISTFILE=${ZDOTDIR:-~}/.histfile
 HISTSIZE=1000
@@ -39,15 +32,6 @@ eval "$(register-python-argcomplete pipx)"
 
 ## Configure zsh plugins loaded by Antidote
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# source ${ZDOTDIR:-~}/.p10k.zsh
-# export POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-# export POWERLEVEL9K_VIRTUALENV_CONTENT_EXPANSION='${P9K_CONTENT%% *}'
-# export POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-# export POWERLEVEL9K_AZURE_CONTENT_EXPANSION='${*}'
-# export POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION=''
-# export POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION=''
-# unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND            ## Always show kubectx
 
 # shellcheck source=/dev/null
 HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
@@ -115,8 +99,6 @@ fi
 # if command -v batpipe >/dev/null; then
 #   eval "$(batpipe)"
 # fi
-
-
 
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
