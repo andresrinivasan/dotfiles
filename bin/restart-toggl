@@ -1,3 +1,7 @@
 #!/bin/sh
 
-pgrep -q Toggl && [ "$(lsof -t -p $(pgrep Toggl) -a -i | wc -l)" = 0 ] && pkill Toggl && open -a "Toggl Track"
+re='MacOS/Toggl.Track$'
+t=$(pgrep -af "${re}")
+p=${t:-0}
+
+[ "${p}" != 0 ] && [ "$(lsof -t -p "${p}" -a -i | wc -l)" = 0 ] && pkill "${p}" && open -a "Toggl Track"
