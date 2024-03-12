@@ -8,7 +8,7 @@ module.fathom  = appID('/Applications/Fathom.app')
 function module:restart() 
     local app, w
 
-    for k, v in paris(module.apps) do
+    for k, v in pairs(module.apps) do
         app = hs.application.get(v)
         if app ~= nil then
             app:kill9()
