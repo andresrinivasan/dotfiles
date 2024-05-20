@@ -27,9 +27,6 @@ autoload -U +X bashcompinit && bashcompinit
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-## pipx completions
-eval "$(register-python-argcomplete pipx)"
-
 ## Configure zsh plugins loaded by Antidote
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
@@ -93,7 +90,7 @@ fi
 
 ## Stick with less/lesspipe as batpipe doesn't support PDF out of the box
 if command -v lesspipe.sh >/dev/null; then
-  eval "$(lesspipe.sh)"
+  lesspipe.sh|source /dev/stdin  ## Per man lesspipe
 fi
 
 # if command -v batpipe >/dev/null; then

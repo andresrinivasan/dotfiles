@@ -7,8 +7,6 @@
 	editor = vi
 	pager = less -R
 	autocrlf = input
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [commit]
 	##gpgsign = true
 [pull]
@@ -27,10 +25,11 @@
 
 [url "git@github.com:IOTechSystems"]
 	insteadOf = https://github.com/IOTechSystems
-
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [checkout]
 	defaultRemote = origin
 [push]
 	defaultRemote = origin
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
