@@ -31,7 +31,7 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # shellcheck source=/dev/null
-HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)
+HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)	## eval brew shellenv?
 if [ "$HOMEBREW_PREFIX" ]; then
   PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
 
@@ -59,8 +59,8 @@ fi
 PATH=~/bin:~/.local/bin:~/.krew/bin:$PATH
 typeset -U PATH path ## Only keep first occurance
 
-if command -v exa >/dev/null; then
-  alias ls='exa --color=auto --classify'
+if command -v eza >/dev/null; then
+  alias ls='eza --color=auto --classify'
   alias lltr='ll -snew'
 else
   alias ls='ls --color=auto'
