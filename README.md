@@ -1,32 +1,11 @@
 # dot-files
 
-## Fonts
+Yet another collection of dot files. And some not dot files.
 
-* Dejavu Sans Mono Nerd Font for glyph support in iterm and VSCode terminal
-* FuraCode-Retina (FiraCode Nerd Font) for VSCode
+## Brew
 
-```sh
-brew tap homebrew/cask-fonts
-brew cask install font-dejavusansmono-nerd-font
-brew cask install font-firacode-nerd-font
-```
+Install brew and then use the Brew Bundle file to install all fonts and tools.
 
-## Tools
+## Other Dependencies
 
-* Brew (MacOS)
-* bash (via Brew on MacOS)
-* Bash Completion 2
-* tmux
-* Pureline (via Github)
-* jq
-* et
-* ssh
-* git
-* git-extras
-* hub
-* go
-* Redis
-* socat
-* Python 3
-* Iterm 2
-* VSC
+https://github.com/seebi/dircolors-solarized
