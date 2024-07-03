@@ -60,7 +60,7 @@ PATH=~/bin:~/.local/bin:~/.krew/bin:$PATH
 typeset -U PATH path ## Only keep first occurance
 
 if command -v eza >/dev/null; then
-  alias ls='eza --color=auto --classify'
+  alias ls='(){eza --color=auto --classify $1}'
   alias lltr='ll -snew'
 else
   alias ls='ls --color=auto'
@@ -84,7 +84,7 @@ if command -v bat >/dev/null; then
   alias lessm="prettybat --language=markdown"
   alias man=batman && compdef batman='man'
 
-  export BAT_THEME="Monokai Extended"
+  export BAT_THEME=base16
   export BAT_STYLE="plain"
 fi
 
