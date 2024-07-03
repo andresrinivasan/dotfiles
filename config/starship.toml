@@ -58,6 +58,7 @@ symbol = ' '
 
 ## From https://github.com/starship/starship/discussions/1252#discussioncomment-7281234
 [custom.git_status]
+ignore_timeout = true
 command = '''
 git_status=$(git status --porcelain)
 # Untracked or Deleted (unstaged) files - Red
