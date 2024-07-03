@@ -90,7 +90,8 @@ end)
 paste = require("paste")
 onsleep = require("on-sleep")
 onwake = require("on-wake")
-ssb = require("ssb")
+-- ssb = require("ssb")
+-- restart = require("restart")
 
 
 -- Add $HOMEBREW_PREFIX/bin/hs REPL
