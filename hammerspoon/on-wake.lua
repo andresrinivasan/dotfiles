@@ -7,10 +7,18 @@ local module = {}
 --     while clock() - t0 <= n do end
 -- end
 
-function module:healthCheckApp(a)
+local utils = require("utils")
+
+local togglTrackApp = utils:appID("/Applications/Toggl Track.app")
+
+-- Suppress warning about Spotlight
+hs.application.enableSpotlightForNameSearches(false)
+
+local function healthCheckApp(hint, checkWindow)
     return function()
-        print(a)
-        if hs.application.get(a:title()) == nil then
+        if hs.application.get(hint) == nil then
+            return false
+        elseif checkWindow and hs.application.get(hint):focusedWindow() == nil then
             return false
         else
             return true
@@ -18,36 +26,51 @@ function module:healthCheckApp(a)
     end
 end
 
-function module:launchApp(hint)
+local function hideApp(hint)
     return function(timer)
-        local a = hs.application.open("Toggl Track", 0, true)
-        print(a)
-        hs.timer.waitUntil(module.healthCheckApp(a), module.hideApp(a))
+        hs.application.get(hint):focusedWindow():close()
     end
 end
 
-function module:hideApp(a)
+local function launchApp(hint)
     return function(timer)
-        print("hideApp")
-        a:focusedWindow():close()
+        hs.application.launchOrFocusByBundleID(hint)
+        hs.timer.waitUntil(healthCheckApp(hint, true), hideApp(hint))
     end
 end
 
-function module:maybeRestartTogglTrack()
-    local a = hs.application.get("Toggl Track")
+local function maybeRestartTogglTrack()
+    local a = hs.application.get(togglTrackApp)
     if a ~= nil then
         a:kill9()
-        hs.timer.waitWhile(module.healthCheckApp("Toggl Track"), module.launchApp("Toggl Track"))
+        hs.timer.waitWhile(healthCheckApp(togglTrackApp, false), launchApp(togglTrackApp))
     end
+end
+
+-- Assumes sudo doesn't require a password for renice
+--
+-- Eg. 
+-- ALL ALL = NOPASSWD: /usr/bin/renice
+
+local function pgrep(exitCode, stdOut, stdErr)
+    local p = string.gsub(stdOut, "%s+", "")
+    local t = hs.task.new("/usr/bin/sudo", nil, {"/usr/bin/renice", "20", p})
+    t:start()
+end
+
+local function renice(name)
+    local t = hs.task.new("/usr/bin/pgrep", pgrep, {name})
+    t:start()
 end
     
 local function f(event)
     if event == hs.caffeinate.watcher.systemDidWake then
-        module.maybeRestartTogglTrack()
+        maybeRestartTogglTrack()
+        renice("crowdstrike")
     end
 end
 
--- module.watcher = hs.caffeinate.watcher.new(f)
--- module.watcher:start()
+module.watcher = hs.caffeinate.watcher.new(f)
+module.watcher:start()
 
 return module
