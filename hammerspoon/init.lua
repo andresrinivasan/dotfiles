@@ -87,6 +87,9 @@ hs.hotkey.bind(ctrl_opt, "F9", function()
   setDefaultAudioDevice(builtinIn, builtinOut)
 end)
 
+-- Suppress warning about Spotlight
+hs.application.enableSpotlightForNameSearches(false)
+
 paste = require("paste")
 onsleep = require("on-sleep")
 onwake = require("on-wake")
