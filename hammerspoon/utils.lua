@@ -9,4 +9,21 @@ function module:appID(app)
     end
 end
 
+-- Assumes sudo doesn't require a password for renice
+--
+-- Eg. 
+-- ALL ALL = NOPASSWD: /usr/bin/renice
+
+local function doRenice(nice)
+  return function(exitCode, stdOut, stdErr)
+      local n = tostring(nice)
+      local p = string.gsub(stdOut, "%s+", "")
+      hs.task.new("/usr/bin/sudo", nil, {"/usr/bin/renice", n, p}):start()
+  end
+end
+
+function module:renice(name, nice)
+  hs.task.new("/usr/bin/pgrep", doRenice(nice), {name}):start()
+end
+
 return module
