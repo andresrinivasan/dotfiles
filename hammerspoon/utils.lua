@@ -26,4 +26,30 @@ function module:renice(name, nice)
   hs.task.new("/usr/bin/pgrep", doRenice(nice), {name}):start()
 end
 
+function module:maybeKillApp(appBundle, postKill, timeout)
+  local postKill = postKill or function(timer) return end
+  local timeout = timeout or 5
+
+  local a = hs.application.get(appBundle)
+
+  if a ~= nil then
+      a:kill()
+      local t = hs.timer.waitUntil(function() 
+          a = hs.application.get(appBundle)
+          if a == nil then 
+              return true
+          else
+              a:kill9()
+              return false
+          end
+      end, postKill)
+      hs.timer.doAfter(timeout, function()
+        if t:running() then
+          t:stop()
+          hs.notify.show(a:title(), "", "I should have shutdown but I did not stop")
+        end
+      end)
+  end
+end
+
 return module
