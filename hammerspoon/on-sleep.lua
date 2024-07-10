@@ -8,22 +8,14 @@ local utils = require("utils")
 --     t:start()
 -- end
 
-local pureVPNApp = utils:appID("/Applications/PureVPN.app")
-
 local function maybeKillPureVPN()
-    local a = hs.application.get(pureVPNApp)
-    if a ~= nil then
-        a:kill9()
-        hs.timer.waitUntil(function() 
-            if hs.application.get(pureVPNApp) == nil then 
-                return true
-            else
-                return false
-            end
-        end, function(timer)
-            hs.task.new("/usr/sbin/scutil", nil, {"--nc", "stop", "7847D419-2363-4F3B-BE31-F677A4E707FF"}):start()
-        end)
-    end
+    utils:maybeKillApp(utils:appID("/Applications/PureVPN.app"), function(timer)
+        hs.task.new("/usr/sbin/scutil", nil, {"--nc", "stop", "7847D419-2363-4F3B-BE31-F677A4E707FF"}):start()
+    end)
+end
+
+function maybeKillZoom()
+    utils:maybeKillApp(utils:appID("/Applications/zoom.us.app"))
 end
 
 local function decaffeinate()
@@ -36,6 +28,7 @@ local function f(event)
         --pureVPNOff()
         decaffeinate()
         maybeKillPureVPN()
+        maybeKillZoom()
     end
 end
 
