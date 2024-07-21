@@ -14,8 +14,15 @@ local function maybeKillPureVPN()
     end)
 end
 
-function maybeKillZoom()
+local function maybeKillZoom()
     utils:maybeKillApp(utils:appID("/Applications/zoom.us.app"))
+end
+
+local function maybeKillFathom()
+    local hint = utils:appID("/Applications/Fathom.app")
+    utils:maybeKillApp(hint, function(timer)
+        hs.application.launchOrFocusByBundleID(hint)
+    end)
 end
 
 local function decaffeinate()
@@ -29,6 +36,7 @@ local function f(event)
         decaffeinate()
         maybeKillPureVPN()
         maybeKillZoom()
+        maybeKillFathom()
     end
 end
 
