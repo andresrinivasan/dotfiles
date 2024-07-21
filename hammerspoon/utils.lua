@@ -1,7 +1,6 @@
--- From https://github.com/zzamboni/dot-hammerspoon/blob/master/init.lua
-
 local module = {}
 
+-- From https://github.com/zzamboni/dot-hammerspoon/blob/master/init.lua
 -- Returns the bundle ID of an application, given its path.
 function module:appID(app)
     if hs.application.infoForBundlePath(app) then
@@ -10,7 +9,6 @@ function module:appID(app)
 end
 
 -- Assumes sudo doesn't require a password for renice
---
 -- Eg. 
 -- ALL ALL = NOPASSWD: /usr/bin/renice
 
@@ -22,8 +20,17 @@ local function doRenice(nice)
   end
 end
 
-function module:renice(name, nice)
-  hs.task.new("/usr/bin/pgrep", doRenice(nice), {name}):start()
+function module:renice(name, nice, all)
+  local arg
+
+  if all then
+    arg = "-i"
+  else
+    arg = ""
+  end
+
+
+  hs.task.new("/usr/bin/pgrep", doRenice(nice), {arg, name}):start()
 end
 
 function module:maybeKillApp(appBundle, postKill, timeout)
@@ -46,7 +53,7 @@ function module:maybeKillApp(appBundle, postKill, timeout)
       hs.timer.doAfter(timeout, function()
         if t:running() then
           t:stop()
-          hs.notify.show(a:title(), "", "I should have shutdown but I did not stop")
+          hs.notify.show(a:title(), "", "I should have been shutdown but I did")
         end
       end)
   end
