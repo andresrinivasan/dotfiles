@@ -24,6 +24,7 @@ fpath=(~/.zfunc $fpath)
 ## XXX review what these flags mean
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+setopt COMPLETE_ALIASES
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
@@ -60,7 +61,7 @@ PATH=~/bin:~/.local/bin:~/.krew/bin:$PATH
 typeset -U PATH path ## Only keep first occurance
 
 if command -v eza >/dev/null; then
-  alias ls='eza --color=auto --classify'
+  alias ls='eza --color=auto --classify' && compdef ls=eza
   alias lltr='ll -snew'
 else
   alias ls='ls --color=auto'
@@ -82,7 +83,7 @@ if command -v bat >/dev/null; then
   alias lessy="prettybat --language=yaml"
   alias lessj="prettybat --language=json"
   alias lessm="prettybat --language=markdown"
-  alias man=batman && compdef batman='man'
+  alias man=batman
 
   export BAT_THEME=base16
   export BAT_STYLE="plain"
@@ -100,9 +101,9 @@ fi
 alias grep='grep --color=auto'
 alias fgrep='grep -F --color=auto'
 alias egrep='grep -E --color=auto'
-alias k=kubectl && compdef k='kubectl'
-alias d=docker && compdef d='docker'
-alias dc='docker compose' && compdef dc='docker'
+alias k=kubectl && compdef k=kubectl
+alias d=docker && compdef d=docker
+alias dc='docker compose' && compdef dc=docker
 
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
 
