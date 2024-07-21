@@ -9,8 +9,6 @@ local module = {}
 
 local utils = require("utils")
 
-local togglTrackApp = utils:appID("/Applications/Toggl Track.app")
-
 local function hideApp(hint)
     return function(timer)
         hs.application.get(hint):focusedWindow():close()
@@ -31,17 +29,8 @@ local function launchApp(hint)
 end
 
 local function maybeRestartTogglTrack()
-    local a = hs.application.get(togglTrackApp)
-    if a ~= nil then
-        a:kill()
-        hs.timer.waitUntil(function()
-            if hs.application.get(hint) == nil then
-                return true
-            else
-                return false
-            end
-        end, launchApp(togglTrackApp))
-    end
+    local id = utils:appID("/Applications/Toggl Track.app")
+    utils:maybeKillApp(id, launchApp(id))
 end
     
 local function f(event)
