@@ -8,17 +8,17 @@ local utils = require("utils")
 --     t:start()
 -- end
 
-local function maybeKillPureVPN()
+local function maybeRestartPureVPN()
     utils:maybeKillApp(utils:appID("/Applications/PureVPN.app"), function(timer)
         hs.task.new("/usr/sbin/scutil", nil, {"--nc", "stop", "7847D419-2363-4F3B-BE31-F677A4E707FF"}):start()
     end)
 end
 
-local function maybeKillZoom()
+local function maybeRestartZoom()
     utils:maybeKillApp(utils:appID("/Applications/zoom.us.app"))
 end
 
-local function maybeKillFathom()
+local function maybeRestartFathom()
     local hint = utils:appID("/Applications/Fathom.app")
     utils:maybeKillApp(hint, function(timer)
         hs.application.launchOrFocusByBundleID(hint)
@@ -34,9 +34,9 @@ local function f(event)
         -- googleOneVPNOff()
         --pureVPNOff()
         decaffeinate()
-        maybeKillPureVPN()
-        maybeKillZoom()
-        maybeKillFathom()
+        maybeRestartPureVPN()
+        maybeRestartZoom()
+        maybeRestartFathom()
     end
 end
 
