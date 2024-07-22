@@ -53,7 +53,7 @@ function module:maybeKillApp(appBundle, postKill, timeout)
       hs.timer.doAfter(timeout, function()
         if t:running() then
           t:stop()
-          hs.notify.show(a:title(), "", "I should have been shutdown but I did")
+          hs.notify.show(a:title(), "", "I should have been shutdown but I did not.")
         end
       end)
   end
