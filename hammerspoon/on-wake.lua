@@ -18,13 +18,15 @@ end
 local function launchApp(hint)
     return function(timer)
         hs.application.launchOrFocusByBundleID(hint)
-        hs.timer.waitUntil(function()
-            if hs.application.get(hint) ~= nil and hs.application.get(hint):focusedWindow() ~= nil then
-                return true
-            else
-                return false
-            end
-        end, hideApp(hint))
+        hs.timer.doAfter(5, function() 
+            hs.timer.waitUntil(function()
+                if hs.application.get(hint) ~= nil and hs.application.get(hint):focusedWindow() ~= nil then
+                    return true
+                else
+                    return false
+                end
+            end, hideApp(hint))
+        end)
     end
 end
 
