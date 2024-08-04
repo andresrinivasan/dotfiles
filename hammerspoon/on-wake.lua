@@ -18,21 +18,23 @@ end
 local function launchApp(hint)
     return function(timer)
         hs.application.launchOrFocusByBundleID(hint)
-        hs.timer.doAfter(5, function() 
+        hs.application.get(hint):hide()
+        hs.timer.doAfter(3, function() 
             hs.timer.waitUntil(function()
                 if hs.application.get(hint) ~= nil and hs.application.get(hint):focusedWindow() ~= nil then
                     return true
                 else
                     return false
                 end
-            end, hideApp(hint))
+            end, function(timer)
+                hs.application.get(hint):focusedWindow():close()
+            end)
         end)
     end
 end
 
 local function maybeRestartTogglTrack()
-    local id = utils:appID("/Applications/Toggl Track.app")
-    utils:maybeKillApp(id, launchApp(id))
+    utils:maybeKillApp(id, launchApp(utils:appID("/Applications/Toggl Track.app")))
 end
     
 local function f(event)
