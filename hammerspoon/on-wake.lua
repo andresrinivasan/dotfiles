@@ -34,7 +34,8 @@ local function launchApp(hint)
 end
 
 local function maybeRestartTogglTrack()
-    utils:maybeKillApp(id, launchApp(utils:appID("/Applications/Toggl Track.app")))
+    local id = utils:appID("/Applications/Toggl Track.app")
+    utils:maybeKillApp(id, launchApp(id))
 end
     
 local function f(event)
