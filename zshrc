@@ -33,10 +33,8 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # shellcheck source=/dev/null
 ##HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)	## eval brew shellenv?
-eval $(/opt/homebrew/bin/brew shellenv | egrep 'PREFIX|CELLAR|REPOSITORY|INFOPATH') ## Fix MANPATH
-if [ "$HOMEBREW_PREFIX" ]; then
-  PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
-
+eval $((/usr/local/bin/brew shellenv 2>/dev/null || /opt/homebrew/bin/brew shellenv 2>/dev/null) | egrep -v MANPATH) ## Fix MANPATH
+if [ -n "$HOMEBREW_PREFIX" ]; then
   for p in coreutils gnu-tar grep; do
     PATH="$HOMEBREW_PREFIX"/opt/"$p"/libexec/gnubin:"$PATH"
     MANPATH=$(readlink -f "$HOMEBREW_PREFIX"/opt/"$p"/libexec/man):"$MANPATH"
