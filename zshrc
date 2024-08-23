@@ -32,7 +32,8 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # shellcheck source=/dev/null
-HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)	## eval brew shellenv?
+##HOMEBREW_PREFIX=$( (/usr/local/bin/brew --prefix || /opt/homebrew/bin/brew --prefix) 2>/dev/null)	## eval brew shellenv?
+eval $(/opt/homebrew/bin/brew shellenv | egrep 'PREFIX|CELLAR|REPOSITORY|INFOPATH') ## Fix MANPATH
 if [ "$HOMEBREW_PREFIX" ]; then
   PATH="$HOMEBREW_PREFIX"/bin:"$PATH"
 
@@ -75,18 +76,18 @@ else
     fi
   fi
 fi
-alias la='ls -a'
-alias ll='ls -l'
+alias la="ls -a"
+alias ll="ls -l"
 
 if command -v bat >/dev/null; then
-  alias cat='bat --paging=never'
+  alias cat="bat --paging=never"
   alias lessy="prettybat --language=yaml"
   alias lessj="prettybat --language=json"
   alias lessm="prettybat --language=markdown"
   alias man=batman
 
   export BAT_THEME=base16
-  export BAT_STYLE="plain"
+  export BAT_STYLE=plain
 fi
 
 ## Stick with less/lesspipe as batpipe doesn't support PDF out of the box
@@ -98,13 +99,14 @@ fi
 #   eval "$(batpipe)"
 # fi
 
-alias grep='grep --color=auto'
-alias fgrep='grep -F --color=auto'
-alias egrep='grep -E --color=auto'
+alias grep="grep --color=auto"
+alias fgrep="grep -F --color=auto"
+alias egrep="grep -E --color=auto"
 alias k=kubectl && compdef k=kubectl
 alias d=docker && compdef d=docker
-alias dc='docker compose' && compdef dc=docker
-
+alias dc="docker compose" && compdef dc=docker
+alias create-venv="python3 -m venv venv"
+alias activate-venv="source venv/bin/activate"
 alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
 
 ## From https://www.freecodecamp.org/news/how-to-get-a-docker-container-ip-address-explained-with-examples/
