@@ -103,9 +103,9 @@ alias egrep="grep -E --color=auto"
 alias k=kubectl && compdef k=kubectl
 alias d=docker && compdef d=docker
 alias dc="docker compose" && compdef dc=docker
-alias create-venv="python3 -m venv venv"
-alias activate-venv="source venv/bin/activate"
-alias create-gh-repo="gh repo create --public --clone --add-readme --license unlicense"
+alias venv-create="python3 -m venv venv"
+alias venv-activate="source venv/bin/activate"
+alias gh-repo-create="gh repo create --public --clone --add-readme --license unlicense"
 
 ## From https://www.freecodecamp.org/news/how-to-get-a-docker-container-ip-address-explained-with-examples/
 ## See also https://stackoverflow.com/questions/65648918/docker-inspect-format-its-output-as-a-table (`docker inspect` is JSON centric; no tables)
