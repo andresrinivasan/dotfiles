@@ -1,14 +1,31 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=${ZDOTDIR:-~}/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
 setopt autocd
 setopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
 setopt ignore_eof
-setopt EXTENDED_HISTORY
+
+## History config. See https://postgresqlstan.github.io/cli/zsh-history-options/
+SAVEHIST=9000
+HISTSIZE=9999                   # set HISTSIZE > SAVEHIST
+setopt EXTENDED_HISTORY         # include timestamp
+setopt HIST_BEEP                # beep if attempting to access a history entry which isn’t there
+setopt HIST_EXPIRE_DUPS_FIRST   # trim dupes first if history is full
+setopt HIST_FIND_NO_DUPS        # do not display previously found command
+setopt HIST_IGNORE_DUPS         # do not save duplicate of prior command
+setopt HIST_IGNORE_SPACE        # do not save if line starts with space
+setopt HIST_NO_STORE            # do not save history commands
+setopt HIST_REDUCE_BLANKS       # strip superfluous blanks
+setopt INC_APPEND_HISTORY       # don’t wait for shell to exit to save history lines
+
+# setopt HIST_ALLOW_CLOBBER       # related to shell clobber setting
+# setopt HIST_IGNORE_ALL_DUPS     # remove old event if new one is a duplicate
+# setopt HIST_LEX_WORDS           # related to how white space is saved
+# setopt HIST_NO_FUNCTIONS        # do not save function commands
+# setopt HIST_SAVE_NO_DUPS        # omit older duplicates of newer commands
+# setopt HIST_SUBST_PATTERN       # use pattern matching for substitutions
+# setopt HIST_VERIFY              # expand command line without executing it
 
 # Added by compinstall
 zstyle :compinstall filename ${ZDOTDIR:-~}/.zshrc
