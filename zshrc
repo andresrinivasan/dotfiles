@@ -18,6 +18,7 @@ setopt HIST_IGNORE_SPACE        # do not save if line starts with space
 setopt HIST_NO_STORE            # do not save history commands
 setopt HIST_REDUCE_BLANKS       # strip superfluous blanks
 setopt INC_APPEND_HISTORY       # don’t wait for shell to exit to save history lines
+setopt SHARE_HISTORY            # share history
 
 # setopt HIST_ALLOW_CLOBBER       # related to shell clobber setting
 # setopt HIST_IGNORE_ALL_DUPS     # remove old event if new one is a duplicate
@@ -124,6 +125,13 @@ alias dc="docker compose" && compdef dc=docker
 alias venv-create="python3 -m venv venv"
 alias venv-activate="source venv/bin/activate"
 alias gh-repo-create="gh repo create --public --clone --add-readme --license unlicense"
+
+## Note using tr instead of sed 's/\+/-/g' | sed 's/\//_/g' | sed 's/=//g
+if command -v basenc >/dev/null; then
+  alias basenc-base64url="basenc --base64url -w0"
+else
+  alias basenc-base64url="base64 -w0 | tr +/ -_ | tr -d '\n'" 
+fi
 
 ## From https://superuser.com/questions/232457/zsh-output-whole-history
 ## Depends on setup EXTENDED_HISTORY
