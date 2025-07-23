@@ -128,9 +128,9 @@ alias gh-repo-create="gh repo create --public --clone --add-readme --license unl
 
 ## Note using tr instead of sed 's/\+/-/g' | sed 's/\//_/g' | sed 's/=//g
 if command -v basenc >/dev/null; then
-  alias basenc-base64url="basenc --base64url -w0"
+  alias basenc-base64url="basenc --base64url -w0 | tr -d '='"
 else
-  alias basenc-base64url="base64 -w0 | tr +/ -_ | tr -d '\n'" 
+  alias base64url="base64 -w0 | tr '+/' '-_' | tr -d '='" 
 fi
 
 ## From https://superuser.com/questions/232457/zsh-output-whole-history
