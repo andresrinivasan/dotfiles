@@ -98,11 +98,7 @@ onwake = require("on-wake")
 
 
 -- Add $HOMEBREW_PREFIX/bin/hs REPL
-
 if hs.fs.attributes("/opt/homebrew", "mode") then
   homebrew_prefix = "/opt/homebrew"
 end
-hs.ipc.cliInstall(homebrew_prefix)
-
-
-
+hs.ipc.cliInstall(homebrew_prefix .. "/bin")
