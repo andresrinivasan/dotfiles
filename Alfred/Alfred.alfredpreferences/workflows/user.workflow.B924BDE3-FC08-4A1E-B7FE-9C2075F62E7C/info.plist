@@ -138,7 +138,7 @@
 	<key>description</key>
 	<string>Create a new iTerm window with either the default profile or a selected profile</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>New iTerm Window</string>
 	<key>objects</key>
