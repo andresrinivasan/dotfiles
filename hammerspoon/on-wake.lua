@@ -18,16 +18,20 @@ end
 local function launchApp(hint)
     return function(timer)
         hs.application.launchOrFocusByBundleID(hint)
-        hs.application.get(hint):hide()
+        -- hs.application.get(hint):hide()
         hs.timer.doAfter(3, function() 
             hs.timer.waitUntil(function()
-                if hs.application.get(hint) ~= nil and hs.application.get(hint):focusedWindow() ~= nil then
+                -- if hs.application.get(hint) ~= nil and hs.application.get(hint):focusedWindow() ~= nil then
+                if hs.application.get(hint) ~= nil and hs.application.get(hint):allWindows() ~= nil then
                     return true
                 else
                     return false
                 end
             end, function(timer)
-                hs.application.get(hint):focusedWindow():close()
+                -- hs.application.get(hint):focusedWindow():close()
+                for _, w in pairs(hs.application.get(hint):allWindows()) do
+                    w:close()
+                end
             end)
         end)
     end

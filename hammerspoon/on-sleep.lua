@@ -8,35 +8,40 @@ local utils = require("utils")
 --     t:start()
 -- end
 
-local function maybeRestartPureVPN()
+local function maybeKillPureVPN()
     utils:maybeKillApp(utils:appID("/Applications/PureVPN.app"), function(timer)
         hs.task.new("/usr/sbin/scutil", nil, {"--nc", "stop", "7847D419-2363-4F3B-BE31-F677A4E707FF"}):start()
     end)
 end
 
-local function maybeRestartZoom()
+local function maybeKillZoom()
     utils:maybeKillApp(utils:appID("/Applications/zoom.us.app"))
 end
 
-local function maybeRestartFathom()
-    local hint = utils:appID("/Applications/Fathom.app")
-    utils:maybeKillApp(hint, function(timer)
-        hs.application.launchOrFocusByBundleID(hint)
-    end)
-end
+-- local function maybeRestartFathom()
+--     local hint = utils:appID("/Applications/Fathom.app")
+--     utils:maybeKillApp(hint, function(timer)
+--         hs.application.launchOrFocusByBundleID(hint)
+--     end)
+-- end
 
 local function decaffeinate()
     spoon.Caffeine:setState(false)
 end
+
+-- local function stopTMetricTimer()
+--     spoon.TMetric:stopTimer()
+-- end
 
 local function f(event)
     if event == hs.caffeinate.watcher.systemWillSleep then
         -- googleOneVPNOff()
         --pureVPNOff()
         decaffeinate()
-        maybeRestartPureVPN()
-        maybeRestartZoom()
-        maybeRestartFathom()
+        maybeKillPureVPN()
+        maybeKillZoom()
+        -- stopTMetricTimer()
+        -- maybeRestartFathom()
     end
 end
 
