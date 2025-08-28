@@ -40,13 +40,6 @@ antidote load
 
 fpath=(~/.zfunc $fpath)
 
-## XXX review what these flags mean
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-setopt COMPLETE_ALIASES
-
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
-
 ## Configure zsh plugins loaded by Antidote
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
@@ -78,6 +71,20 @@ fi
 PATH=~/bin:~/.local/bin:~/.krew/bin:$PATH
 typeset -U PATH path ## Only keep first occurance
 
+## Initialize and configure zsh's completion system to work with both native zsh 
+## completion and bash compatibility completion, and also enable completion for aliases.
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+setopt COMPLETE_ALIASES
+
+if command -v terraform >/dev/null; then
+  complete -o nospace -C "$(command -v terraform)" terraform
+fi
+
+if command -v aws >/dev/null; then
+  complete -C "$(command -v aws_completer)" aws
+fi
+
 if command -v eza >/dev/null; then
   alias ls='eza --color=auto --classify' && compdef ls=eza
   alias lltr='ll -snew'
@@ -108,13 +115,12 @@ if command -v bat >/dev/null; then
 fi
 
 ## Stick with less/lesspipe as batpipe doesn't support PDF out of the box
-if command -v lesspipe.sh >/dev/null; then
-  lesspipe.sh|source /dev/stdin  ## Per man lesspipe
-fi
-
 # if command -v batpipe >/dev/null; then
 #   eval "$(batpipe)"
 # fi
+if command -v lesspipe.sh >/dev/null; then
+  lesspipe.sh|source /dev/stdin  ## Per man lesspipe
+fi
 
 alias grep="grep --color=auto"
 alias fgrep="grep -F --color=auto"
