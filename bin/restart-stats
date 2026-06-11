@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pkill -9 Stats
+sleep 5
+open -a Stats

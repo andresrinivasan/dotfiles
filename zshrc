@@ -105,9 +105,9 @@ alias ll="ls -l"
 
 if command -v bat >/dev/null; then
   alias cat="bat --paging=never"
-  alias lessy="prettybat --language=yaml"
-  alias lessj="prettybat --language=json"
-  alias lessm="prettybat --language=markdown"
+  # alias lessy="prettybat --language=yaml"
+  # alias lessj="prettybat --language=json"
+  alias mless="prettybat --language=markdown"
   alias man=batman
 
   export BAT_THEME=base16
@@ -122,6 +122,10 @@ if command -v lesspipe.sh >/dev/null; then
   lesspipe.sh|source /dev/stdin  ## Per man lesspipe
 fi
 
+if command -v jless >/dev/null; then
+  alias yless="jless --yaml"
+fi
+
 alias grep="grep --color=auto"
 alias fgrep="grep -F --color=auto"
 alias egrep="grep -E --color=auto"
@@ -131,6 +135,7 @@ alias dc="docker compose" && compdef dc=docker
 alias venv-create="python3 -m venv venv"
 alias venv-activate="source venv/bin/activate"
 alias gh-repo-create="gh repo create --public --clone --add-readme --license unlicense"
+alias wget='(){ http -d "${1}"}'
 
 ## Note using tr instead of sed 's/\+/-/g' | sed 's/\//_/g' | sed 's/=//g
 if command -v basenc >/dev/null; then
@@ -203,12 +208,13 @@ fi
 export VISUAL=vi
 export PERL_HOMEDIR=0
 export GCP_VM_FILTER=andre ## For list-gcp-vm
-export HOMEBREW_NO_ENV_HINTS=true
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 ## export POETRY_VIRTUALENVS_IN_PROJECT=true - Switched to venv
 export LESS=-FRX
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+export HOMEBREW_NO_ENV_HINTS=true
+export HOMEBREW_UPGRADE_GREEDY=true
 
 ## XXX Explore this further
 autoload -U select-word-style
@@ -220,4 +226,6 @@ WORDCHARS=$WORDCHARS:s:-: ## Remove'-' from list of word characters
 
 ##test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
+export STARSHIP_LOG=error
 eval "$(starship init zsh)"
+source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
