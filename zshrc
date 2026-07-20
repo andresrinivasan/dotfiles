@@ -86,7 +86,7 @@ if command -v aws >/dev/null; then
 fi
 
 if command -v eza >/dev/null; then
-  alias ls='eza --color=auto --classify' && compdef ls=eza
+  alias ls='eza --color=auto --classify=auto' && compdef ls=eza
   alias lltr='ll -snew'
 else
   alias ls='ls --color=auto'
@@ -110,7 +110,7 @@ if command -v bat >/dev/null; then
   alias mless="prettybat --language=markdown"
   alias man=batman
 
-  export BAT_THEME=base16
+  export BAT_THEME=ansi
   export BAT_STYLE=plain
 fi
 
@@ -119,7 +119,7 @@ fi
 #   eval "$(batpipe)"
 # fi
 if command -v lesspipe.sh >/dev/null; then
-  lesspipe.sh|source /dev/stdin  ## Per man lesspipe
+  eval "$(lesspipe.sh)"
 fi
 
 if command -v jless >/dev/null; then
@@ -132,10 +132,12 @@ alias egrep="grep -E --color=auto"
 alias k=kubectl && compdef k=kubectl
 alias d=docker && compdef d=docker
 alias dc="docker compose" && compdef dc=docker
-alias venv-create="python3 -m venv venv"
-alias venv-activate="source venv/bin/activate"
+# alias venv-create="python3 -m venv venv"
+# alias venv-activate="source venv/bin/activate"
 alias gh-repo-create="gh repo create --public --clone --add-readme --license unlicense"
 alias wget='(){ http -d "${1}"}'
+
+alias claude='(){ if [ "${TERM_PROGRAM}" = "vscode" ]; then command claude "$@"; else open -na Ghostty.app --args --working-directory="$PWD" --theme="iTerm2 Solarized Light" -e command claude "$@"; fi }'
 
 ## Note using tr instead of sed 's/\+/-/g' | sed 's/\//_/g' | sed 's/=//g
 if command -v basenc >/dev/null; then
@@ -210,11 +212,15 @@ export PERL_HOMEDIR=0
 export GCP_VM_FILTER=andre ## For list-gcp-vm
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 ## export POETRY_VIRTUALENVS_IN_PROJECT=true - Switched to venv
+
 export LESS=-FRX
+export LESSCOLORIZER="bat --style=plain --theme=ansi"
+
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
 export HOMEBREW_NO_ENV_HINTS=true
 export HOMEBREW_UPGRADE_GREEDY=true
+export HOMEBREW_NO_ASK=true
 
 ## XXX Explore this further
 autoload -U select-word-style
