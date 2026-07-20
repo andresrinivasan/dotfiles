@@ -1,0 +1,233 @@
+tap "eth-p/software", trusted: true
+tap "homebrew/autoupdate"
+tap "homebrew/bundle"
+tap "jphastings/tools"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Programmable completion for Bash 4.2+
+brew "bash-completion@2"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# GNU binary tools for native development
+brew "binutils"
+# Mozilla CA bundle for Python
+brew "certifi"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Libpcap-based NetFlow probe
+brew "fprobe"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Git extension for versioning large files
+brew "git-lfs"
+# GNU version of the tar archiving utility
+brew "gnu-tar"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
+# GNU grep, egrep and fgrep
+brew "grep"
+# Make JSON greppable
+brew "gron"
+# Development framework for multimedia applications
+brew "gstreamer"
+# Kubernetes package manager
+brew "helm"
+# Improved top (interactive process viewer)
+brew "htop"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Convert images to PDF via direct JPEG inclusion
+brew "img2pdf"
+# Command-line pager for JSON data
+brew "jless"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Super fast CLI tool to decode and encode JWTs built in Rust
+brew "jwt-cli"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx"
+# Pager program similar to more
+brew "less"
+# Input filter for the pager less
+brew "lesspipe"
+# Linux virtual machines
+brew "lima"
+# LLM inference in C/C++
+brew "llama.cpp"
+# Utility to list open files
+brew "lsof"
+# Powerful, lightweight programming language
+brew "lua"
+# UNIX manpage compiler toolset
+brew "mandoc"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Display and control your Android device
+brew "scrcpy"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# High-performance data structure server that primarily serves key/value workloads
+brew "valkey"
+# Automatic workarounds for problems in Wine
+brew "winetricks"
+# Network analyzer and capture tool - without graphical user interface
+brew "wireshark"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
+# GTK+ dialog boxes for the command-line
+brew "zenity"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Bash scripts that integrate bat with various command-line tools
+brew "eth-p/software/bat-extras"
+# Application launcher and productivity software
+cask "alfred"
+# Android SDK component
+cask "android-platform-tools"
+# Menu bar icon organiser
+cask "bartender"
+# Brings the power of Copilot coding agent directly to your terminal
+cask "copilot-cli"
+# Tool to run Windows software
+cask "crossover"
+# UI for creating Windows installer ISO from UUPDump
+cask "crystalfetch"
+# Preference Pane for controlling cursor hiding
+cask "cursorcerer"
+# App for note taking, organising, task lists, and archiving
+cask "evernote"
+# Web browser
+cask "firefox"
+cask "font-fira-code"
+cask "font-fira-code-nerd-font"
+cask "font-twitter-color-emoji"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Cross-platform Git credential storage for multiple hosting providers
+cask "git-credential-manager"
+# Desktop automation application
+cask "hammerspoon"
+# Game launcher
+cask "heroic"
+# Free and open-source media player
+cask "kodi"
+# Multi-platform web browser
+cask "microsoft-edge"
+# Utility to extend trackpad functionality
+cask "middleclick"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Replacement for Docker Desktop
+cask "orbstack"
+# VPN client
+cask "purevpn"
+# System monitor for the menu bar
+cask "stats"
+# Clock and time zone app
+cask "the-clock"
+# Utility to hide the notch
+cask "topnotch"
+# Open-source code editor
+cask "visual-studio-code"
+# Multimedia player
+cask "vlc"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
+# Switch apps, windows, or tabs
+cask "witch"
+# Open-source version of the X.Org X Window System
+cask "xquartz"
+# OpenJDK distribution from Azul
+cask "zulu"
+vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+vscode "brunnerh.insert-unicode"
+vscode "codeium.codeium"
+vscode "davidanson.vscode-markdownlint"
+vscode "davidnussio.vscode-jq-playground"
+vscode "dbaeumer.vscode-eslint"
+vscode "dbankier.vscode-quick-select"
+vscode "docker.docker"
+vscode "donjayamanne.githistory"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "felipecaputo.git-project-manager"
+vscode "formulahendry.code-runner"
+vscode "foxundermoon.shell-format"
+vscode "github.vscode-pull-request-github"
+vscode "golang.go"
+vscode "google.geminicodeassist"
+vscode "hangxingliu.vscode-systemd-support"
+vscode "hashicorp.terraform"
+vscode "hilleer.yaml-plus-json"
+vscode "jq-syntax-highlighting.jq-syntax-highlighting"
+vscode "mechatroner.rainbow-csv"
+vscode "mhutchie.git-graph"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "ms-python.black-formatter"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode-remote.vscode-remote-extensionpack"
+vscode "ms-vscode.cpptools"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vscode.remote-server"
+vscode "mscgenjs.vscode-mscgen"
+vscode "pomdtr.excalidraw-editor"
+vscode "redhat.vscode-yaml"
+vscode "stkb.rewrap"
+vscode "tamasfe.even-better-toml"
+vscode "timonwong.shellcheck"
+vscode "tomoyukim.vscode-mermaid-editor"
+vscode "vscode-icons-team.vscode-icons"
+vscode "vsls-contrib.gistfs"
+vscode "yandeu.five-server"
+vscode "yinfei.luahelper"
+vscode "yzane.markdown-pdf"
+vscode "yzhang.markdown-all-in-one"
