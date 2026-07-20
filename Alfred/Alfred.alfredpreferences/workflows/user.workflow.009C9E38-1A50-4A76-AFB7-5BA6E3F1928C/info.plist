@@ -38,7 +38,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>osascript -e 'tell application "Firefox" to activate' -e 'tell application "System Events" to keystroke "2" using {command down}'</string>
+				<string>osascript -e 'tell application "Firefox" to activate' -e 'tell application "System Events" to keystroke "4" using {command down}'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
