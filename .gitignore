@@ -1,1 +1,4 @@
 .DS_Store
+
+# Claude Code per-machine override layer — deliberately not shared
+claude/settings.local.json
