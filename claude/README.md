@@ -14,14 +14,13 @@ ln -s ~/repos/dotfiles/claude/hooks          ~/.claude/hooks
 ln -s ~/repos/dotfiles/claude/themes/solarized-light-custom.json \
       ~/.claude/themes/solarized-light-custom.json
 
-cp ~/repos/dotfiles/claude/known_marketplaces.json ~/.claude/plugins/
+claude plugin marketplace add anthropics/claude-plugins-official
 ```
 
 `hooks/` is linked as a whole directory, so new hooks need no extra link.
 
-`known_marketplaces.json` is **copied, not linked** — Claude Code rewrites it (it stamps
-`lastUpdated` on marketplace refresh), and `installLocation` inside it is an absolute path
-that only matches this account. Re-copy it here if you add a marketplace.
+The marketplace is registered by command rather than by a tracked file — see
+[`plugins/`](#deliberately-not-tracked) below for why.
 
 ## What's here
 
@@ -31,7 +30,6 @@ that only matches this account. Re-copy it here if you add a marketplace.
 | `settings.json` | Bedrock env, theme, permission allowlist, `PreToolUse` hooks |
 | `hooks/` | Hook scripts referenced by `settings.json` |
 | `themes/` | `settings.json` sets `theme: custom:solarized-light-custom`; without this file the setting dangles |
-| `known_marketplaces.json` | Records the `anthropics/claude-plugins-official` marketplace |
 
 `hooks/block-venv-exec.py` must stay executable (`chmod +x`). `settings.json` invokes it via
 `python3`, so a lost mode bit is a confusing rather than obvious failure.
@@ -85,8 +83,18 @@ Machine-local state and churn under `~/.claude/`:
 ```
 projects/   sessions/   history.jsonl   shell-snapshots/   file-history/   cache/
 ide/        daemon/     daemon.log      jobs/              session-env/    backups/
-paste-cache/            mcp-needs-auth-cache.json          plugins/marketplaces/
+paste-cache/            mcp-needs-auth-cache.json          plugins/
 ```
+
+The whole `plugins/` tree is Claude Code's own state. `plugins/marketplaces/` is a git clone of
+the marketplace, and `plugins/known_marketplaces.json` is the generated index over it — Claude
+Code stamps `lastUpdated` on every marketplace refresh, and the `installLocation` inside it is an
+absolute path valid only on this account. Its one durable fact is *which* marketplaces are
+registered, and that is reproduced by the `claude plugin marketplace add` in the install steps
+above. `claude plugin marketplace list` shows the current set.
+
+If a **private or third-party** marketplace is ever added, record its source here as another
+`marketplace add` line — the URL is real configuration, unlike the generated file around it.
 
 Also `claude_desktop_config.json`, which is already a symlink into
 `~/Library/Application Support/Claude/` and owned by the desktop app.
