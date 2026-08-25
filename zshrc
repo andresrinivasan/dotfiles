@@ -1,3 +1,7 @@
+
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 # Lines configured by zsh-newuser-install
 setopt autocd
 setopt beep
@@ -85,6 +89,26 @@ if command -v aws >/dev/null; then
   complete -C "$(command -v aws_completer)" aws
 fi
 
+if command -v uv >/dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+  
+  # Custom completer to add .venv/bin/ entries to `uv run`
+  _uv_run_local_bin() {
+    if [[ -d .venv/bin ]]; then
+      local -a local_binaries
+      local_binaries=( .venv/bin/*(N:t) )
+      _describe 'local venv binary' local_binaries
+    fi
+  }
+
+  # Hook the custom completer into uv's completion definition if it exists
+  if (( $+functions[_uv] )); then
+    # If completing after 'run', fallback or combine with local binaries
+    # Zsh allows appending custom matchers or intercepting the positional context
+    zstyle ':completion:*:*:uv:*:*' insert-tab pending
+  fi
+fi 
+
 if command -v eza >/dev/null; then
   alias ls='eza --color=auto --classify=auto' && compdef ls=eza
   alias lltr='ll -snew'
@@ -138,6 +162,8 @@ alias gh-repo-create="gh repo create --public --clone --add-readme --license unl
 alias wget='(){ http -d "${1}"}'
 
 alias claude='(){ if [ "${TERM_PROGRAM}" = "vscode" ]; then command claude "$@"; else open -na Ghostty.app --args --working-directory="$PWD" --theme="iTerm2 Solarized Light" -e command claude "$@"; fi }'
+##alias kiro='AWS_VAULT_BACKEND=op-desktop AWS_VAULT_OP_VAULT_ID=37bn6lsxboha2wpdqz2hwhqmba AWS_VAULT_OP_DESKTOP_ACCOUNT_ID="andre.srinivasan@gmail.com" AWS_PROFILE=bedrock aws-vault exec bedrock -- command kiro-cli'
+alias kiro='AWS_PROFILE=bedrock command kiro-cli'
 
 ## Note using tr instead of sed 's/\+/-/g' | sed 's/\//_/g' | sed 's/=//g
 if command -v basenc >/dev/null; then
@@ -232,6 +258,10 @@ WORDCHARS=$WORDCHARS:s:-: ## Remove'-' from list of word characters
 
 ##test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
+source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
 export STARSHIP_LOG=error
 eval "$(starship init zsh)"
-source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
