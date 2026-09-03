@@ -1,7 +1,7 @@
 command = /opt/homebrew/bin/zsh
 click-repeat-interval = 500
 auto-update-channel = stable
-theme = Catppuccin Mocha
+theme = Selenized Light
 background-opacity = 0.95
 background-blur-radius = 20
 font-family = FiraCode Nerd Font Mono Ret
