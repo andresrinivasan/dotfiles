@@ -76,6 +76,27 @@ When writing Python code, use Python's built-in libraries and capabilities direc
 
 Only delegate to shell tools when the operation is fundamentally shell-based (e.g., git commands, package managers) or when a specialized CLI tool is the standard interface.
 
+## TypeScript/JavaScript Package Management
+
+Use `bun` for all TypeScript/JavaScript package management operations:
+- **Installing packages**: `bun install`
+- **Adding dependencies**: `bun add <package>`
+- **Adding dev dependencies**: `bun add -d <package>`
+- **Running scripts**: `bun run <script>`
+- **Executing files directly**: `bun <file.ts>` (no build step needed for TypeScript)
+
+Do NOT use `npm`, `yarn`, or `pnpm` for package operations.
+
+## TypeScript/JavaScript Development
+
+When writing TypeScript/JavaScript code, use the language's built-in capabilities directly:
+- **HTTP requests**: Use `fetch()` (built into Bun runtime) for REST API calls, not shell commands like `curl`
+- **JSON processing**: Use `JSON.parse()` / `JSON.stringify()`, not `jq` via subprocess
+- **File operations**: Use `fs` module or Bun's file APIs (`Bun.file()`, `Bun.write()`), not shell commands like `cat`, `sed`, `awk`
+- **System operations**: Use `child_process` or Bun's `Bun.spawn()` when truly needed, but prefer native JavaScript/TypeScript
+
+Only delegate to shell tools when the operation is fundamentally shell-based (e.g., git commands) or when a specialized CLI tool is the standard interface.
+
 ## HTTP Requests
 
 Use `httpie` for making HTTP requests instead of `curl`:
@@ -90,4 +111,101 @@ This ensures maximum portability across different systems.
 ## Rationale
 
 - **uv**: Significantly faster than pip, better dependency resolution, modern tooling
+- **bun**: Significantly faster than npm/yarn, all-in-one runtime and package manager, native TypeScript support
 - **httpie**: More intuitive syntax, better formatted output, easier to read and debug
+
+# Context Management
+
+## AWS Command Hygiene
+
+Always bound AWS CLI output to prevent context overflow:
+
+- **Use `--query`** to extract only needed fields (JMESPath syntax)
+- **Use `--output text`** for single-value results instead of JSON
+- **Pass `--region` explicitly** when working across regions
+
+**Why:** One unbounded AWS command can return megabytes of JSON. A single
+`securityhub get-findings` without `--query` returns the full ASFF document and can exhaust
+context mid-task.
+
+Examples:
+```bash
+# Good - bounded output
+aws ec2 describe-instances \
+  --region us-west-1 \
+  --query 'Reservations[].Instances[].[InstanceId,State.Name,InstanceType]' \
+  --output text
+
+# Bad - unbounded JSON
+aws ec2 describe-instances --region us-west-1
+```
+
+For complex queries where multiple fields are needed, use `--query` to extract a subset and
+`--output json` for structure, but never pipe raw AWS output without filtering.
+
+## Subagent Delegation
+
+Delegate noisy investigation to subagents when the answer is short but the evidence is bulky.
+
+**When to delegate:**
+- The answer is a conclusion in 10 lines or fewer
+- The evidence requires multiple AWS describe/get/list calls whose JSON is far larger than the answer
+- You need to WebFetch AWS documentation (see below)
+
+**When NOT to delegate:**
+- One bounded command would answer the question
+- You need the raw data for further processing
+- The investigation is part of the main task flow
+
+Example: "Why is this Lambda timing out?" → delegate to `aws-probe` subagent if available.
+The subagent reads logs, configuration, and VPC settings, then reports: "Lambda has no VPC access
+but is trying to reach an RDS instance in a private subnet."
+
+## Plan Lifecycle
+
+Plans in `.claude/plans/` are working documents, not durable documentation.
+
+**After executing a plan:**
+1. Propagate durable facts into the appropriate documentation (STATUS.md, design docs, etc.)
+2. Commit the plan
+3. Delete the plan file
+
+**Why:** Git history is the archive. Executed plans left in the tree look current and put
+superseded designs one careless grep away from being read as active. Use
+`git log --diff-filter=D --name-only -- .claude/plans/` to list deleted plans, then
+`git show <sha>:<path>` to read one.
+
+## WebFetch and AWS Documentation
+
+Never `WebFetch` an AWS documentation index page.
+
+**Why:** `WebFetch` returns the entire page as markdown with no way to bound the output. A
+service's entry in the AWS General Reference endpoints index
+(`docs.aws.amazon.com/general/latest/gr/<service>.html`) returns every regional endpoint table
+and quota table to answer one row of one table.
+
+**Instead:**
+- Fetch the narrowest page in the service's developer guide
+- Delegate to a `general-purpose` subagent and ask for specific sections
+- For policy/template JSON, always request it **verbatim** — paraphrased condition keys or
+  rewritten resources can be subtly wrong
+
+**Measured:** Four doc fetches while planning one integration cost more context than every AWS
+call in that session combined.
+
+## Documentation Reading Strategy
+
+When working with large documentation sets (>100KB):
+
+- **Read sections, not whole files** — grep for headings and read that slice. Headings are
+  stable and are the intended entry points.
+- **Know which file to read when** — project CLAUDE.md or AGENTS.md files should tell you the
+  starting point (e.g., "Start any session by reading docs/STATUS.md")
+- **One file should be the entry point** — typically a STATUS.md or README.md that's meant to be
+  read whole and points to other docs for detail
+
+Example:
+```bash
+# Read just the "Deployment" section of a large doc
+grep -A 30 "^## Deployment" docs/architecture.md
+```
