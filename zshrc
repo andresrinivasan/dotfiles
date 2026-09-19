@@ -258,10 +258,10 @@ WORDCHARS=$WORDCHARS:s:-: ## Remove'-' from list of word characters
 
 ##test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
-source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 
 export STARSHIP_LOG=error
 eval "$(starship init zsh)"
+source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script

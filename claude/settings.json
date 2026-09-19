@@ -121,5 +121,6 @@
     ]
   },
   "plansDirectory": ".claude/plans",
-  "theme": "custom:solarized-light-custom"
+  "theme": "custom:solarized-light-custom",
+  "model": "sonnet"
 }
