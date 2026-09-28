@@ -161,7 +161,7 @@ alias dc="docker compose" && compdef dc=docker
 alias gh-repo-create="gh repo create --public --clone --add-readme --license unlicense"
 alias wget='(){ http -d "${1}"}'
 
-alias claude='(){ if [ "${TERM_PROGRAM}" = "vscode" ]; then command claude "$@"; else open -na Ghostty.app --args --working-directory="$PWD" --theme="iTerm2 Solarized Light" -e command claude "$@"; fi }'
+alias claude='(){ if [ "${TERM_PROGRAM}" = "vscode" ]; then command claude "$@"; else open -na Ghostty.app --args --working-directory="$PWD" --window-width=79 --window-height=47 --theme="Catppuccin Latte" -e command claude "$@"; fi }'
 ##alias kiro='AWS_VAULT_BACKEND=op-desktop AWS_VAULT_OP_VAULT_ID=37bn6lsxboha2wpdqz2hwhqmba AWS_VAULT_OP_DESKTOP_ACCOUNT_ID="andre.srinivasan@gmail.com" AWS_PROFILE=bedrock aws-vault exec bedrock -- command kiro-cli'
 alias kiro='AWS_PROFILE=bedrock command kiro-cli'
 
