@@ -1,3 +1,7 @@
+# General
+
+No em-dash ever.
+
 # Read Only Commands
 
 ## Permissions
@@ -86,8 +90,6 @@ Use `bun` for all TypeScript/JavaScript package management operations:
 - **Executing files directly**: `bun <file.ts>` (no build step needed for TypeScript)
 
 Do NOT use `npm`, `yarn`, or `pnpm` for package operations.
-
-## TypeScript/JavaScript Development
 
 When writing TypeScript/JavaScript code, use the language's built-in capabilities directly:
 - **HTTP requests**: Use `fetch()` (built into Bun runtime) for REST API calls, not shell commands like `curl`
