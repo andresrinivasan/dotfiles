@@ -1,6 +1,6 @@
 
 # Kiro CLI pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+# [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 
 # Lines configured by zsh-newuser-install
 setopt autocd
@@ -259,9 +259,11 @@ WORDCHARS=$WORDCHARS:s:-: ## Remove'-' from list of word characters
 ##test -e ~/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.zsh
 
 
-# Kiro CLI post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+# # Kiro CLI post block. Keep at the bottom of this file.
+# [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 
 export STARSHIP_LOG=error
 eval "$(starship init zsh)"
 source /Users/asrinivasan/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
+
+# [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
