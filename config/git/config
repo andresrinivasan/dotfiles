@@ -30,10 +30,10 @@
 [push]
 	defaultRemote = origin
 	followTags = true
+[credential "https://se-demo.3b.dev"]
+	provider = generic
 [credential]
 	helper = 
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
-[credential "https://se-demo.3b.dev"]
-	provider = generic
